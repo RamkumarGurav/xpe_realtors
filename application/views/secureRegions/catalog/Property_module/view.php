@@ -45,7 +45,7 @@ $sale_duration_type_data = [
                         <li class="breadcrumb-item"><a href="<?= MAINSITE_Admin . "wam" ?>">Home</a></li>
                         <li class="breadcrumb-item"><a
                                 href="<?= MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name ?>">
-                                <?= $user_access->module_name ?>
+                                <?= $user_access->name ?>
                                 List
                             </a></li>
                         <li class="breadcrumb-item active">Details</li>

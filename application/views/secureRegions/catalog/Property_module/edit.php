@@ -172,7 +172,7 @@ $sale_duration_type_data = [
 						<li class="breadcrumb-item"><a href="<?= MAINSITE_Admin . "wam" ?>">Home</a></li>
 						<li class="breadcrumb-item"><a
 								href="<?= MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name ?>">
-								<?= $user_access->module_name ?>
+								<?= $user_access->name ?>
 								List
 							</a></li>
 						<? if (!empty($property_data)) { ?>
@@ -302,12 +302,12 @@ $sale_duration_type_data = [
 											<option value="">Select State</option>
 											<?php foreach ($state_data as $item) {
 												$selected = "";
-												if ($item->state_id == $state_id) {
+												if ($item->id == $state_id) {
 													$selected = "selected";
 												}
 												?>
-												<option value="<?php echo $item->state_id ?>" <?php echo $selected ?>>
-													<?php echo $item->state_name ?>
+												<option value="<?php echo $item->id ?>" <?php echo $selected ?>>
+													<?php echo $item->name ?>
 													<?php if ($item->status != 1) {
 														echo " [Block]";
 													} ?>
@@ -1084,8 +1084,8 @@ $sale_duration_type_data = [
 				type: 'post',
 				dataType: "json",
 				data: {
-					'table_name': 'city', 'showable_column_name': 'city_name', 'select_title': 'Select City',
-					'primary_column_name': "city_id", 'primary_column_value': city_id,
+					'table_name': 'city', 'showable_column_name': 'name', 'select_title': 'Select City',
+					'primary_column_name': "id", 'primary_column_value': city_id,
 					'foreign_column_name': "state_id", 'foreign_column_value': state_id,
 					"<?php echo $csrf['name'] ?>": "<?php echo $csrf['hash'] ?>"
 				},
@@ -1109,8 +1109,8 @@ $sale_duration_type_data = [
 				type: 'post',
 				dataType: "json",
 				data: {
-					'table_name': 'location', 'showable_column_name': 'location_name', 'select_title': 'Select Location',
-					'primary_column_name': "location_id", 'primary_column_value': location_id,
+					'table_name': 'location', 'showable_column_name': 'name', 'select_title': 'Select Location',
+					'primary_column_name': "id", 'primary_column_value': location_id,
 					'foreign_column_name': "city_id", 'foreign_column_value': city_id,
 					"<?php echo $csrf['name'] ?>": "<?php echo $csrf['hash'] ?>"
 				},

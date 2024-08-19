@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-require_once (APPPATH . "controllers/secureRegions/Main.php");
+require_once(APPPATH . "controllers/secureRegions/Main.php");
 class Property_sub_type_module extends Main
 {
 

@@ -93,10 +93,10 @@ if (!empty($state_data)) {
                                             <strong class="full">Data Base Id</strong>
                                             <?php echo $state_data->id ?>
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <strong class="full">Country Name</strong>
                                             <?php echo $state_data->country_name ?>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <strong class="full">State Name</strong>
                                             <?php echo $state_data->name ?>
@@ -113,14 +113,14 @@ if (!empty($state_data)) {
                                             <?php } else { ?> No <i class="fas fa-ban btn-danger btn-sm "></i>
                                             <?php } ?>
                                         </td>
-
-                                    </tr>
-
-                                    <tr>
                                         <td>
                                             <strong class="full">Added On</strong>
                                             <?php echo date("d-m-Y h:i:s A", strtotime($state_data->added_on)) ?>
                                         </td>
+                                    </tr>
+
+                                    <tr>
+
                                         <td>
                                             <strong class="full">Added By</strong>
                                             <?php echo $state_data->added_by_name ?>

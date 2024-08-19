@@ -37,7 +37,7 @@ if (!empty($property_data)) {
 $feilds_details_data = [
   (object) [
     "selected_property_type_id" => 0,
-    "property_age_id_prop" => 2,
+    "property_age_id_prop" => 0,
     "bhk_type_id_prop" => 0,
     "plot_facing_type_id_prop" => 0,
     "door_facing_type_id_prop" => 0,

@@ -5,7 +5,7 @@ $page_module_name = "State";
 $name = "";
 $state_code = "";
 $id = 0;
-$country_id = 0;
+$country_id = 1;
 $status = 1;
 $is_display = 1;
 $record_action = "Add New Record";
@@ -16,7 +16,8 @@ if (!empty($state_data)) {
 	$name = $state_data->name;
 	$state_code = $state_data->state_code;
 	$status = $state_data->status;
-	$country_id = $state_data->country_id;
+	// $country_id = $state_data->country_id;
+	$country_id = 1;
 	$is_display = $state_data->is_display;
 
 }
@@ -78,7 +79,7 @@ if (!empty($state_data)) {
 							<input type="hidden" name="redirect_type" id="redirect_type" value="" />
 
 							<div class="form-group row">
-								<div class="col-md-4 col-sm-6">
+								<!-- <div class="col-md-4 col-sm-6">
 									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Country
 										<span style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-10">
@@ -99,7 +100,7 @@ if (!empty($state_data)) {
 											<?php } ?>
 										</select>
 									</div>
-								</div>
+								</div> -->
 								<div class="col-md-4 col-sm-6">
 									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">State
 										<span style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>

@@ -4,15 +4,15 @@ $page_module_name = "Location";
 
 ?>
 <?php
-$location_name = "";
+$name = "";
 $pincode = "";
-$location_id = 0;
+$id = 0;
 $status = 1;
 $record_action = "Add New Record";
 if (!empty($location_data)) {
     // $record_action = "Update";
-    // $location_id = $location_data->location_id;
-    // $location_name = $location_data->location_name;
+    // $id = $location_data->id;
+    // $name = $location_data->name;
     // $status = $location_data->status;
 
 }
@@ -35,7 +35,7 @@ if (!empty($location_data)) {
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="<?php echo MAINSITE_Admin . "wam" ?>">Home</a></li>
                         <li class="breadcrumb-item"><a
-                                href="<?php echo MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name ?>"><?php echo $user_access->module_name ?>
+                                href="<?php echo MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name ?>"><?php echo $user_access->name ?>
                                 List</a></li>
                         <li class="breadcrumb-item active">Details</li>
                     </ol>
@@ -55,7 +55,7 @@ if (!empty($location_data)) {
                 <div class="card">
 
                     <div class="card-header">
-                        <h3 class="card-title"><?php echo $location_data->location_name ?></h3>
+                        <h3 class="card-title"><?php echo $location_data->name ?></h3>
                         <div class="float-right">
                             <?php
                             if ($user_access->add_module == 1 && false) {
@@ -68,7 +68,7 @@ if (!empty($location_data)) {
                             if ($user_access->update_module == 1) {
                                 ?>
                                 <a
-                                    href="<?php echo MAINSITE_Admin . $user_access->class_name ?>/edit/<?php echo $location_data->location_id ?>">
+                                    href="<?php echo MAINSITE_Admin . $user_access->class_name ?>/edit/<?php echo $location_data->id ?>">
                                     <button type="button" class="btn btn-success btn-sm"><i class="fas fa-edit"></i>
                                         Update</button>
                                 </a>
@@ -90,7 +90,7 @@ if (!empty($location_data)) {
                                     <tr>
                                         <td>
                                             <strong class="full">Data Base Id</strong>
-                                            <?php echo $location_data->location_id ?>
+                                            <?php echo $location_data->id ?>
                                         </td>
                                         <td>
                                             <strong class="full">State</strong>
@@ -102,7 +102,7 @@ if (!empty($location_data)) {
                                         </td>
                                         <td colspan="2">
                                             <strong class="full">Location</strong>
-                                            <?php echo $location_data->location_name ?>
+                                            <?php echo $location_data->name ?>
                                         </td>
 
 
@@ -165,13 +165,13 @@ if (!empty($location_data)) {
                                 <tbody>
                                     <tr>
                                         <td><strong class="full">Data Base Id</strong>
-                                            <?php echo $location_data->location_id ?></td>
+                                            <?php echo $location_data->id ?></td>
                                         <td><strong class="full">Country</strong>
                                             <?php echo $location_data->country_name ?></td>
                                         <td><strong class="full">State</strong>
                                             <?php echo $location_data->state_name ?></td>
                                         <td><strong class="full">Location</strong>
-                                            <?php echo $location_data->location_name ?></td>
+                                            <?php echo $location_data->name ?></td>
                                         <td><strong class="full">Location Code</strong>
                                             <?php echo $location_data->pincode ?></td>
                                         <td><strong class="full">is Display</strong>

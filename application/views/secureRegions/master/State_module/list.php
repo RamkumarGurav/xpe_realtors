@@ -82,7 +82,7 @@ $page_module_name = "State";
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-4 col-md-6">
+                                        <!-- <div class="col-lg-4 col-md-6">
                                             <div class="form-group">
                                                 <label>Country</label>
                                                 <select type="text" class="form-control" id="country_id"
@@ -104,7 +104,7 @@ $page_module_name = "State";
                                                 </select>
 
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <!-- /.col -->
                                         <div class="col-lg-4 col-md-6">
@@ -251,7 +251,7 @@ $page_module_name = "State";
                                         <?php } ?>
                                         <th>State</th>
                                         <th>State Code</th>
-                                        <th>Country</th>
+                                        <!-- <th>Country</th> -->
                                         <th>Display</th>
                                         <th>Added On</th>
                                         <th>Added By</th>
@@ -278,7 +278,7 @@ $page_module_name = "State";
                                                         href="<?php echo MAINSITE_Admin . $user_access->class_name . "/view/" . $item->id ?>"><?php echo $item->name ?></a>
                                                 </td>
                                                 <td><?php echo $item->state_code ?></td>
-                                                <td><?php echo $item->country_name ?></td>
+                                                <!-- <td><?php echo $item->country_name ?></td> -->
 
                                                 <td>
                                                     <?php if ($item->is_display == 1) { ?> <i

@@ -55,7 +55,8 @@
             </div>
           </div>
           <input type="hidden" name="token" id="token" value="<?= $token ?>">
-          <input type="hidden" id="user_id" name="user_id" value="<?= $th_user_resetpwd_details[0]->user_fk ?>">
+          <input type="hidden" id="admin_user_id" name="admin_user_id"
+            value="<?= $au_pwd_reset_token_details[0]->admin_user_id ?>">
 
           <?php //echo form_error('username'); ?>
 
@@ -80,7 +81,7 @@
           </div>
           <div class="col-4">
             <centre><button type="button" onclick="reset_password_fn()" name="login_btn" value="1"
-                class="btn btn-primary btn-block">Reset</button></centre>
+                class="btn btn-primary ">Reset</button></centre>
           </div>
           <div class="col-4">
           </div>
@@ -130,7 +131,7 @@
     $('.message').html('');
     var password = $('#password').val();
     var token = $('#token').val();
-    var user_id = $('#user_id').val();
+    var admin_user_id = $('#admin_user_id').val();
 
     if (password != '') {
 
@@ -140,7 +141,7 @@
         type: "post",
         url: '<?= MAINSITE_Admin ?>Login/save_new_password',
         dataType: "json",
-        data: { 'password': password, 'token': token, 'user_id': user_id },
+        data: { 'password': password, 'token': token, 'admin_user_id': admin_user_id },
         success: function (result) {
           $(".loader").css("display", "none");
 

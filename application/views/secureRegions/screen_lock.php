@@ -22,7 +22,6 @@
   <!-- Automatic element centering -->
   <div class="lockscreen-wrapper">
     <div class="lockscreen-logo">
-      <!-- <img src="<?= base_url() ?>assets/front/images/logo.png"> -->
       <?php if (!empty($company_logo_file_name)): ?>
         <img src="<?= _uploaded_files_ ?>company_profile/logo/<?= $company_logo_file_name ?>"
           style="height:100px;width:auto;">

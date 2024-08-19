@@ -1,4 +1,9 @@
 <?php
+
+$page_module_name = "City";
+
+?>
+<?php
 $name = "";
 $city_code = "";
 $id = 0;
@@ -88,10 +93,10 @@ if (!empty($city_data)) {
                                             <strong class="full">Data Base Id</strong>
                                             <?php echo $city_data->id ?>
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <strong class="full">Country Name</strong>
                                             <?php echo $city_data->country_name ?>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <strong class="full">State Name</strong>
                                             <?php echo $city_data->state_name ?>

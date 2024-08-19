@@ -120,9 +120,12 @@ $sale_duration_type_data = [
         </h2>
         <p>FLAT for SALE : <?= $property_data->description ?></p>
 
-        <a href="<?= $property_data->youtube_link ?>" target="_blank"
-          style="color:#000 !important;text-decoration: none !important">
-          <span href="#" class="btn pdy" style=""><i class="fab fa-youtube"></i></span> &nbsp;Youtube</a>
+        <?php if (!empty($property_data->youtube_link)): ?>
+          <a href="<?= $property_data->youtube_link ?>" target="_blank"
+            style="color:#000 !important;text-decoration: none !important">
+            <span href="#" class="btn pdy" style=""><i class="fab fa-youtube"></i></span> &nbsp;Youtube</a>
+        <?php endif; ?>
+
 
 
       </div>

@@ -30,6 +30,26 @@
       width: 100% !important;
     }
   </style>
+  <style>
+    .custom-file-label.form-control-sm::after {
+      height: 1.8rem;
+      padding: .2rem 0.75rem;
+      height: 30px !important;
+      line-height: 1.8em !important;
+    }
+
+    .custom-file-label {
+      margin-bottom: 0;
+      margin-top: 0 !important;
+      height: 31px !important;
+    }
+
+    input[type="file"] {
+      display: block;
+      height: calc(1.8125rem + 2px);
+      height: 50px;
+    }
+  </style>
   <script>
 
     $.ajaxSetup({
@@ -39,27 +59,6 @@
     });
   </script>
 </head>
-
-<style>
-  .custom-file-label.form-control-sm::after {
-    height: 1.8rem;
-    padding: .2rem 0.75rem;
-    height: 30px !important;
-    line-height: 1.8em !important;
-  }
-
-  .custom-file-label {
-    margin-bottom: 0;
-    margin-top: 0 !important;
-    height: 31px !important;
-  }
-
-  input[type="file"] {
-    display: block;
-    height: calc(1.8125rem + 2px);
-    height: 50px;
-  }
-</style>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed pace-primary"
   data-scrollbar-auto-hide="n">
@@ -96,8 +95,7 @@
 <?php  */ ?>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <?php
-        /*?> <!-- Messages Dropdown Menu -->
+        <?php  /*?> <!-- Messages Dropdown Menu -->
 <li class="nav-item dropdown">
 <a class="nav-link" data-toggle="dropdown" href="#">
 <i class="far fa-comments"></i>
@@ -192,8 +190,7 @@ Nora Silvester
             <?php else: ?>
               <img src="<?= IMAGE_ADMIN ?>logo.jpg" class="user-image img-circle elevation-2">
             <?php endif; ?>
-
-            <span class="d-none d-md-inline"><?php echo $user_data->admin_user_name ?></span>
+            <span class="d-none d-md-inline"><?php echo $user_data->name ?></span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right card-primary card-outline" style="left: inherit; right: 0px; padding: 5px;
@@ -209,7 +206,7 @@ Nora Silvester
               <?php endif; ?>
 
               <p>
-                <?php echo $user_data->admin_user_name ?> - <?php echo $user_data->admin_user_role_name ?>
+                <?php echo $user_data->name ?> - <?php echo $user_data->admin_user_role_name ?>
                 <small>Member since <?php echo date("M, Y", strtotime($user_data->added_on)) ?></small>
               </p>
             </li>

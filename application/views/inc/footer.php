@@ -256,4 +256,35 @@
    });
 </script>
 
+
+
+<!-- //--PARSLEY FORM -->
+<script type="text/javascript" src="<?= JS ?>jquery-3.2.1.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script type="text/javascript" src="<?= JS ?>parsley.min.js"></script>
+<script>
+   var formCounter = 0;
+   function submitForm(event) {
+      formCounter++;
+      if (formCounter > 1) {
+         event.preventDefault();
+         return false;
+      }
+   }
+
+   function onSubmit(token) {
+      //contactvalidateForm();
+      if (!$("#Contact-us").parsley().isValid()) {
+         $("#Contact-us").parsley().validate();
+         return false;
+      }
+      else {
+         $("#Contact-us").submit();
+         return true;
+      }
+   }
+
+</script>
+<!-- //---------------- -->
+
 </html>

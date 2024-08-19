@@ -1,4 +1,3 @@
-
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
@@ -47,155 +46,152 @@
                                 <?php echo form_open(MAINSITE_Admin . "$user_access->class_name/$user_access->function_name", array('method' => 'post', 'id' => 'search_report_form', "name" => "search_report_form", 'style' => '', 'class' => 'form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data')); ?>
 
                                 <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Field</label>
-                                                    <select name="field_name" id="field_name" class="form-control"
-                                                        style="width: 100%;">
-                                                        <!-- <option value=''>Select Field</option> -->
-                                                        <option value='ft.name' <?php if ($field_name == 'ft.name') {
-                                                            echo 'selected';
-                                                        } ?>>City   Name
-                                                        </option>
-                                                        <option value='ft.city_code' <?php if ($field_name == 'ft.city_code') {
-                                                            echo 'selected';
-                                                        } ?>>City Code
-                                                        </option>
-                                                    </select>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Field</label>
+                                                <select name="field_name" id="field_name" class="form-control"
+                                                    style="width: 100%;">
+                                                    <!-- <option value=''>Select Field</option> -->
+                                                    <option value='ft.name' <?php if ($field_name == 'ft.name') {
+                                                        echo 'selected';
+                                                    } ?>>City Name
+                                                    </option>
+                                                    <option value='ft.city_code' <?php if ($field_name == 'ft.city_code') {
+                                                        echo 'selected';
+                                                    } ?>>City Code
+                                                    </option>
+                                                </select>
 
-                                                </div>
-                                            </div>
-                                            <!-- /.col -->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Field Value</label>
-                                                    <input type="text" name="field_value" id="field_value"
-                                                        placeholder="Field Value" style="width: 100%;"
-                                                        class="form-control" value="<?php echo $field_value ?>">
-                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Country</label>
-                                                    <select type="text" class="form-control" id="country_id"
-                                                        name="country_id" onchange="get_state(this.value ,0)"
-                                                        style="width: 100%;">
-                                                        <option value="">Select Country</option>
-                                                        <?php foreach ($country_data as $cd) {
-                                                            $selected = "";
-                                                            if ($cd->country_id == $country_id) {
-                                                                $selected = "selected";
-                                                            }
-                                                            ?>
-                                                            <option value="<?php echo $cd->country_id ?>" <?php echo $selected ?>>
-                                                                <?php echo $cd->country_name ?>
-                                                                <?php if ($cd->status != 1) {
-                                                                    echo " [Block]";
-                                                                } ?>
-                                                            </option>
-                                                        <?php } ?>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                            <!-- /.col -->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>State</label>
-                                                    <select type="text" class="form-control" id="state_id"
-                                                        name="state_id" style="width: 100%;">
-                                                        <option value="">Select State</option>
-                                                    </select>
-
-                                                </div>
+                                        <!-- /.col -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Field Value</label>
+                                                <input type="text" name="field_value" id="field_value"
+                                                    placeholder="Field Value" style="width: 100%;" class="form-control"
+                                                    value="<?php echo $field_value ?>">
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Start Date</label>
-                                                    <div class="input-group date reservationdate" id="reservationdate"
-                                                        data-target-input="nearest">
-                                                        <input type="text" value="<?php echo $start_date ?>"
-                                                            name="start_date" id="start_date" placeholder="Start Date"
-                                                            style="width: 100%;"
-                                                            class="form-control datetimepicker-input"
-                                                            data-target="#reservationdate" />
-                                                        <div class="input-group-append" data-target="#reservationdate"
-                                                            data-toggle="datetimepicker">
-                                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <!-- /.col -->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>End Date</label>
-                                                    <div class="input-group date reservationdate1" id="reservationdate1"
-                                                        data-target-input="nearest">
-                                                        <input type="text" value="<?php echo $end_date ?>"
-                                                            name="end_date" id="end_date" placeholder="End Date"
-                                                            style="width: 100%;"
-                                                            class="form-control datetimepicker-input"
-                                                            data-target="#reservationdate1" />
-                                                        <div class="input-group-append" data-target="#reservationdate1"
-                                                            data-toggle="datetimepicker">
-                                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Status</label>
-                                                    <select name="record_status" id="record_status" class="form-control"
-                                                        style="width: 100%;">
-                                                        <option value=''>Active / Block</option>
-                                                        <option value='1' <?php if ($record_status == 1) {
-                                                            echo 'selected';
-                                                        } ?>>
-                                                            Active</option>
-                                                        <option value='zero' <?php if ($record_status == 'zero') {
-                                                            echo 'selected';
-                                                        } ?>>Block</option>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                            <!-- /.col -->
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Is Display?</label>
-                                                    <select name="is_display" id="is_display" class="form-control"
-                                                        style="width: 100%;">
-                                                        <option value=''>Yes / No</option>
-                                                        <option value='1' <?php if ($is_display == 1) {
-                                                            echo 'selected';
-                                                        } ?>>
-                                                            Yes</option>
-                                                        <option value='zero' <?php if ($is_display == 'zero') {
-                                                            echo 'selected';
-                                                        } ?>>No</option>
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <select type="text" class="form-control" id="state_id" name="state_id"
+                                                    style="width: 100%;">
+                                                    <option value="">Select State</option>
+                                                    <?php foreach ($state_data as $item) {
+                                                        $selected = "";
+                                                        if ($item->state_id == $state_id) {
+                                                            $selected = "selected";
+                                                        }
+                                                        ?>
+                                                        <option value="<?php echo $item->state_id ?>" <?php echo $selected ?>>
+                                                            <?php echo $item->state_name ?>
+                                                            <?php if ($item->status != 1) {
+                                                                echo " [Block]";
+                                                            } ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <select type="text" class="form-control" id="state_id" name="state_id"
+                                                    style="width: 100%;">
+                                                    <option value="">Select State</option>
+                                                </select>
+
+                                            </div>
+                                        </div> -->
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date</label>
+                                                <div class="input-group date reservationdate" id="reservationdate"
+                                                    data-target-input="nearest">
+                                                    <input type="text" value="<?php echo $start_date ?>"
+                                                        name="start_date" id="start_date" placeholder="Start Date"
+                                                        style="width: 100%;" class="form-control datetimepicker-input"
+                                                        data-target="#reservationdate" />
+                                                    <div class="input-group-append" data-target="#reservationdate"
+                                                        data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>End Date</label>
+                                                <div class="input-group date reservationdate1" id="reservationdate1"
+                                                    data-target-input="nearest">
+                                                    <input type="text" value="<?php echo $end_date ?>" name="end_date"
+                                                        id="end_date" placeholder="End Date" style="width: 100%;"
+                                                        class="form-control datetimepicker-input"
+                                                        data-target="#reservationdate1" />
+                                                    <div class="input-group-append" data-target="#reservationdate1"
+                                                        data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Status</label>
+                                                <select name="record_status" id="record_status" class="form-control"
+                                                    style="width: 100%;">
+                                                    <option value=''>Active / Block</option>
+                                                    <option value='1' <?php if ($record_status == 1) {
+                                                        echo 'selected';
+                                                    } ?>>
+                                                        Active</option>
+                                                    <option value='zero' <?php if ($record_status == 'zero') {
+                                                        echo 'selected';
+                                                    } ?>>Block</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Is Display?</label>
+                                                <select name="is_display" id="is_display" class="form-control"
+                                                    style="width: 100%;">
+                                                    <option value=''>Yes / No</option>
+                                                    <option value='1' <?php if ($is_display == 1) {
+                                                        echo 'selected';
+                                                    } ?>>
+                                                        Yes</option>
+                                                    <option value='zero' <?php if ($is_display == 'zero') {
+                                                        echo 'selected';
+                                                    } ?>>No</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div class="panel-footer">
                                     <center>
                                         <button type="submit" class="btn btn-info" id="search_report_btn"
@@ -261,7 +257,7 @@
                                         <?php } ?>
                                         <th>City</th>
                                         <th>State</th>
-                                        <th>Country</th>
+                                        <!-- <th>Country</th> -->
                                         <!-- <th>City Code</th> -->
                                         <th>Display</th>
                                         <th>Added On</th>
@@ -289,7 +285,7 @@
                                                         href="<?php echo MAINSITE_Admin . $user_access->class_name . "/view/" . $item->id ?>"><?php echo $item->name ?></a>
                                                 </td>
                                                 <td><?php echo $item->state_name ?></td>
-                                                <td><?php echo $item->country_name ?></td>
+                                                <!-- <td><?php echo $item->country_name ?></td> -->
                                                 <!-- <td><?php echo $item->city_code ?></td> -->
                                                 <td>
                                                     <?php if ($item->is_display == 1) { ?> <i

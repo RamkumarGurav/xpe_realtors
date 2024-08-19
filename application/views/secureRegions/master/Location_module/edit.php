@@ -1,7 +1,7 @@
 <?php
-$location_name = "";
+$name = "";
 $pincode = "";
-$location_id = 0;
+$id = 0;
 $country_id = 1;
 $state_id = 0;
 $city_id = 0;
@@ -10,8 +10,8 @@ $status = 1;
 $record_action = "Add New Record";
 if (!empty($location_data)) {
 	$record_action = "Update";
-	$location_id = $location_data->location_id;
-	$location_name = $location_data->location_name;
+	$id = $location_data->id;
+	$name = $location_data->name;
 	$pincode = $location_data->pincode;
 	$status = $location_data->status;
 	$country_id = 1;
@@ -39,11 +39,11 @@ if (!empty($location_data)) {
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="<?php echo MAINSITE_Admin . "wam" ?>">Home</a></li>
 						<li class="breadcrumb-item"><a
-								href="<?php echo MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name ?>"><?php echo $user_access->module_name ?>
+								href="<?php echo MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name ?>"><?php echo $user_access->name ?>
 								List</a></li>
 						<?php if (!empty($location_data)) { ?>
 							<li class="breadcrumb-item"><a
-									href="<?php echo MAINSITE_Admin . $user_access->class_name . "/view/" . $location_id ?>">View</a></li>
+									href="<?php echo MAINSITE_Admin . $user_access->class_name . "/view/" . $id ?>">View</a></li>
 						<?php } ?>
 						<li class="breadcrumb-item"><?php echo $record_action ?></li>
 					</ol>
@@ -63,7 +63,7 @@ if (!empty($location_data)) {
 				<div class="card">
 
 					<div class="card-header">
-						<h3 class="card-title"><?php echo $location_name ?> <small><?php echo $record_action ?></small></h3>
+						<h3 class="card-title"><?php echo $name ?> <small><?php echo $record_action ?></small></h3>
 					</div>
 					<!-- /.card-header -->
 					<?php
@@ -72,7 +72,7 @@ if (!empty($location_data)) {
 						<?php echo $this->session->flashdata('alert_message'); ?>
 						<div class="card-body">
 							<?php echo form_open(MAINSITE_Admin . "$user_access->class_name/do_edit", array('method' => 'post', 'id' => '', "name" => "ptype_list_form", 'style' => '', 'class' => 'form-horizontal', 'role' => 'form')); ?>
-							<input type="hidden" name="location_id" id="location_id" value="<?php echo $location_id ?>" />
+							<input type="hidden" name="id" id="id" value="<?php echo $id ?>" />
 							<input type="hidden" name="redirect_type" id="redirect_type" value="" />
 
 							<div class="form-group row">
@@ -85,12 +85,12 @@ if (!empty($location_data)) {
 											<option value="">Select State</option>
 											<?php foreach ($state_data as $cd) {
 												$selected = "";
-												if ($cd->state_id == $state_id) {
+												if ($cd->id == $state_id) {
 													$selected = "selected";
 												}
 												?>
-												<option value="<?php echo $cd->state_id ?>" <?php echo $selected ?>>
-													<?php echo $cd->state_name ?>
+												<option value="<?php echo $cd->id ?>" <?php echo $selected ?>>
+													<?php echo $cd->name ?>
 													<?php if ($cd->status != 1) {
 														echo " [Block]";
 													} ?>
@@ -125,8 +125,8 @@ if (!empty($location_data)) {
 									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Location <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control form-control-sm" required id="location_name"
-											name="location_name" value="<?php echo $location_name ?>" placeholder="Location">
+										<input type="text" class="form-control form-control-sm" required id="name" name="name"
+											value="<?php echo $name ?>" placeholder="Location">
 
 									</div>
 								</div>

@@ -55,11 +55,11 @@ $route['secureRegions'] = 'secureRegions/login';
 $route['404_override'] = 'User/pageNotFound';
 $route['translate_uri_dashes'] = TRUE;
 
-
-
 $route['search-results'] = 'user/search_results';
 $route['add_input_fields'] = 'user/add_input_fields';
 $route['property-details/(:any)'] = 'user/property_details/$1';
+$route['load_more_property'] = 'user/load_more_property';
+$route['do_enquiry'] = 'user/do_enquiry';
 // $route['products/(:any)/(:any)'] = 'products/$1/$2';
 
 $route['contact-us'] = 'user/contact_us';
@@ -68,16 +68,7 @@ $route['clients'] = 'user/clients';
 $route['thank-you'] = 'user/thank_you';
 $route['error'] = 'user/error';
 
-// $route['testp'] = 'user/testp';
-// $route['test1'] = 'user/test1';
-// $route['test2'] = 'user/test2';
-// $route['test3'] = 'user/test3';
-$route['do_enquiry'] = 'user/do_enquiry';
-// $route['ajax_insert_enquiry'] = 'user/ajax_insert_enquiry';
-// $route['ajax_insert_career_enquiry'] = 'user/ajax_insert_career_enquiry';
-// $route['ajax_insert_user_employee_logout'] = 'user/ajax_insert_user_employee_logout';
 $route['access-denied'] = 'user/access_denied';
-$route['test1'] = 'user/test1';
 
 
 

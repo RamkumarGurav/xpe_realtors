@@ -231,13 +231,13 @@ class Country_module extends Main
 		$this->load->view('secureRegions/master/Country_module/list_export', $this->data);
 	}
 
-	function view($id = "")
+	function view($country_id = "")
 	{
 		$this->data['page_type'] = "list";
 		$user_access = $this->data['user_access'] = $this->data['User_auth_obj']->check_user_access(array("module_id" => $this->data['page_module_id']));
 
 
-		if (empty($id)) {
+		if (empty($country_id)) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again. </div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
 			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name);
@@ -248,10 +248,8 @@ class Country_module extends Main
 		}
 		$this->data['page_is_master'] = $this->data['user_access']->is_master;
 		$this->data['page_parent_module_id'] = $this->data['user_access']->parent_module_id;
-
-		$this->data['country_data'] = $this->Country_model->get_country_data(array("id" => $id));
-
-		if (empty($id)) {
+		$this->data['country_data'] = $this->Country_model->get_country_data(array("country_id" => $country_id));
+		if (empty($country_id)) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again. </div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
 			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name);
@@ -266,7 +264,7 @@ class Country_module extends Main
 		parent::get_footer();
 	}
 
-	function edit($id = "")
+	function edit($country_id = "")
 	{
 		$this->data['page_type'] = "list";
 		$user_access = $this->data['user_access'] = $this->data['User_auth_obj']->check_user_access(array("module_id" => $this->data['page_module_id']));
@@ -275,13 +273,13 @@ class Country_module extends Main
 		if (empty($this->data['user_access'])) {
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
-		if (empty($id)) {
+		if (empty($country_id)) {
 			if ($user_access->add_module != 1) {
 				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
-		if (!empty($id)) {
+		if (!empty($country_id)) {
 			if ($user_access->update_module != 1) {
 				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
@@ -290,9 +288,8 @@ class Country_module extends Main
 
 		$this->data['page_is_master'] = $this->data['user_access']->is_master;
 		$this->data['page_parent_module_id'] = $this->data['user_access']->parent_module_id;
-
-		if (!empty($id)) {
-			$this->data['country_data'] = $this->Country_model->get_country_data(array("id" => $id));
+		if (!empty($country_id)) {
+			$this->data['country_data'] = $this->Country_model->get_country_data(array("country_id" => $country_id));
 			if (empty($this->data['country_data'])) {
 				$this->session->set_flashdata('alert_message', '<div class="alert alert-danger alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -315,72 +312,70 @@ class Country_module extends Main
 		$user_access = $this->data['user_access'] = $this->data['User_auth_obj']->check_user_access(array("module_id" => $this->data['page_module_id']));
 
 
-		if (empty($_POST['name']) || empty($_POST['short_name'])) {
+		if (empty($_POST['country_name']) || empty($_POST['country_short_name'])) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again. </div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
 			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name);
 			exit;
 		}
-		$id = $_POST['id'];
+		$country_id = $_POST['country_id'];
 		//print_r($_POST);
 		if (empty($this->data['user_access'])) {
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
-		if (empty($id)) {
+		if (empty($country_id)) {
 			if ($user_access->add_module != 1) {
 				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
-		if (!empty($id)) {
+		if (!empty($country_id)) {
 			if ($user_access->update_module != 1) {
 				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
-
-
-
-
-		$enter_data['name'] = $name = trim($_POST['name']);
-		$enter_data['short_name'] = $short_name = trim($_POST['short_name']);
+		$country_name = trim($_POST['country_name']);
+		$country_short_name = trim($_POST['country_short_name']);
 		if (!empty($_POST['dial_code'])) {
 			$dial_code = trim($_POST['dial_code']);
 		} else {
 			$dial_code = 0;
 		}
-		$enter_data['dial_code'] = $dial_code;
-		$enter_data['country_code'] = $country_code = trim($_POST['country_code']);
-		$enter_data['status'] = $status = $_POST['status'];
-
-		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "name = \"$name\" and id != $id"));
-
+		$country_code = trim($_POST['country_code']);
+		$status = $_POST['status'];
+		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "country_name = \"$country_name\" and country_id != $country_id"));
+		//	echo $this->db->last_query();
+		//	print_r($is_exist);
 		if (!empty($is_exist)) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Country already exist in database.</div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
 			//echo $this->session->flashdata('alert_message' );
 			//echo "anubhav";
-			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/edit/" . $id);
+			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/edit/" . $country_id);
 			exit;
 		}
 
-
+		$enter_data['country_name'] = $country_name;
+		$enter_data['country_short_name'] = $country_short_name;
+		$enter_data['dial_code'] = $dial_code;
+		$enter_data['country_code'] = $country_code;
+		$enter_data['status'] = $_POST['status'];
 
 		$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong Please Try Again. </div>';
-		$insert_status = 0;
-		if (!empty($id)) {
+		if (!empty($country_id)) {
 			$enter_data['updated_on'] = date("Y-m-d H:i:s");
 			$enter_data['updated_by'] = $this->data['session_auid'];
-			$insert_status = $this->Common_model->update_operation(array('table' => 'country', 'data' => $enter_data, 'condition' => "id = $id"));
-			if (!empty($insert_status)) {
+			$insertStatus = $this->Common_model->update_operation(array('table' => 'country', 'data' => $enter_data, 'condition' => "country_id = $country_id"));
+			if (!empty($insertStatus)) {
 				$alert_message = '<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-check"></i> Record Updated Successfully </div>';
 			}
 
 		} else {
 			$enter_data['added_on'] = date("Y-m-d H:i:s");
 			$enter_data['added_by'] = $this->data['session_auid'];
-			$insert_status = $this->Common_model->add_operation(array('table' => 'country', 'data' => $enter_data));
-			if (!empty($insert_status)) {
+			$insertStatus = $this->Common_model->add_operation(array('table' => 'country', 'data' => $enter_data));
+			if (!empty($insertStatus)) {
 				$alert_message = '<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-check"></i> New Record Added Successfully </div>';
 			}
 
@@ -425,7 +420,7 @@ class Country_module extends Main
 				}
 				$update_data['updated_on'] = date("Y-m-d H:i:s");
 				$update_data['updated_by'] = $this->data['session_auid'];
-				$response = $this->Common_model->update_operation(array('table' => "country", 'data' => $update_data, 'condition' => "id in ($ids)"));
+				$response = $this->Common_model->update_operation(array('table' => "country", 'data' => $update_data, 'condition' => "country_id in ($ids)"));
 				if ($response) {
 					$this->session->set_flashdata('alert_message', '<div class="alert alert-success alert-dismissible">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

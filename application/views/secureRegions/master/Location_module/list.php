@@ -55,7 +55,7 @@
                                                     <select name="field_name" id="field_name" class="form-control"
                                                         style="width: 100%;">
                                                         <!-- <option value=''>Select Field</option> -->
-                                                        <option value='ft.location_name' <?php if ($field_name == 'ft.location_name') {
+                                                        <option value='ft.name' <?php if ($field_name == 'ft.name') {
                                                             echo 'selected';
                                                         } ?>>Location
                                                         </option>
@@ -288,10 +288,10 @@
                                                     <?php if ($user_access->update_module == 1) { ?>
                                                         <td><input type="checkbox" name="sel_recds[]"
                                                                 id="sel_recds<?php echo $count; ?>"
-                                                                value="<?php echo $item->location_id; ?>" /></td>
+                                                                value="<?php echo $item->id; ?>" /></td>
                                                     <?php } ?>
                                                     <td><a
-                                                            href="<?php echo MAINSITE_Admin . $user_access->class_name . "/view/" . $item->location_id ?>"><?php echo $item->location_name ?></a>
+                                                            href="<?php echo MAINSITE_Admin . $user_access->class_name . "/view/" . $item->id ?>"><?php echo $item->name ?></a>
                                                     </td>
                                                     <td><?php echo $item->pincode ?></td>
                                                     <td><?php echo $item->state_name ?></td>

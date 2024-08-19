@@ -110,7 +110,8 @@ class State_module extends Main
 		$this->data['start_date'] = $start_date;
 		$this->data['record_status'] = $record_status;
 		$this->data['is_display'] = $is_display;
-		$this->data['country_id'] = $country_id;
+		// $this->data['country_id'] = $country_id;
+		$this->data['country_id'] = 1;
 
 		$search['end_date'] = $end_date;
 		$search['start_date'] = $start_date;
@@ -118,7 +119,8 @@ class State_module extends Main
 		$search['field_name'] = $field_name;
 		$search['record_status'] = $record_status;
 		$search['is_display'] = $is_display;
-		$search['country_id'] = $country_id;
+		// $search['country_id'] = $country_id;
+		$search['country_id'] = 1;
 		$search['search_for'] = "count";
 
 		$data_count = $this->State_model->get_state_data($search);
@@ -220,7 +222,8 @@ class State_module extends Main
 		$this->data['start_date'] = $start_date;
 		$this->data['record_status'] = $record_status;
 		$this->data['is_display'] = $is_display;
-		$this->data['country_id'] = $country_id;
+		// $this->data['country_id'] = $country_id;
+		$this->data['country_id'] = 1;
 
 		$search['end_date'] = $end_date;
 		$search['start_date'] = $start_date;
@@ -228,7 +231,8 @@ class State_module extends Main
 		$search['field_name'] = $field_name;
 		$search['record_status'] = $record_status;
 		$search['is_display'] = $is_display;
-		$search['country_id'] = $country_id;
+		// $search['country_id'] = $country_id;
+		$search['country_id'] = 1;
 
 		$this->data['state_data'] = $this->State_model->get_state_data($search);
 
@@ -248,14 +252,13 @@ class State_module extends Main
 			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name);
 			exit;
 		}
+
 		if (empty($this->data['user_access'])) {
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
 		$this->data['page_is_master'] = $this->data['user_access']->is_master;
 		$this->data['page_parent_module_id'] = $this->data['user_access']->parent_module_id;
-
 		$this->data['state_data'] = $this->State_model->get_state_data(array("id" => $id));
-
 		if (empty($id)) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again. anubhav</div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
@@ -324,7 +327,7 @@ class State_module extends Main
 		$user_access = $this->data['user_access'] = $this->data['User_auth_obj']->check_user_access(array("module_id" => $this->data['page_module_id']));
 
 
-		if (empty($_POST['name']) && empty($_POST['country_id'])) {
+		if (empty($_POST['name'])) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again. anubhav</div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
 			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/" . $user_access->function_name);
@@ -348,17 +351,12 @@ class State_module extends Main
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
-
-
-
-
-
-		$enter_data['name'] = $name = trim($_POST['name']);
-		$enter_data['state_code'] = $state_code = trim($_POST['state_code']);
-		$enter_data['country_id'] = $country_id = $_POST['country_id'];
-		$enter_data['status'] = $status = $_POST['status'];
-		$enter_data['is_display'] = $is_display = $_POST['is_display'];
-
+		$name = trim($_POST['name']);
+		$state_code = trim($_POST['state_code']);
+		// $country_id = $_POST['country_id'];
+		$country_id = 1;
+		$status = $_POST['status'];
+		$is_display = $_POST['is_display'];
 		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "name = \"$name\" and id != $id and country_id = $country_id"));
 		//	echo $this->db->last_query();
 		//	print_r($is_exist);
@@ -371,24 +369,26 @@ class State_module extends Main
 			exit;
 		}
 
-
+		$enter_data['country_id'] = $country_id;
+		$enter_data['name'] = $name;
+		$enter_data['state_code'] = $state_code;
+		$enter_data['status'] = $status;
+		$enter_data['is_display'] = $is_display;
 
 		$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong Please Try Again. </div>';
-
-		$insert_status = 0;
 		if (!empty($id)) {
 			$enter_data['updated_on'] = date("Y-m-d H:i:s");
 			$enter_data['updated_by'] = $this->data['session_auid'];
-			$insert_status = $this->Common_model->update_operation(array('table' => 'state', 'data' => $enter_data, 'condition' => "id = $id"));
-			if (!empty($insert_status)) {
+			$insertStatus = $this->Common_model->update_operation(array('table' => 'state', 'data' => $enter_data, 'condition' => "id = $id"));
+			if (!empty($insertStatus)) {
 				$alert_message = '<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-check"></i> Record Updated Successfully </div>';
 			}
 
 		} else {
 			$enter_data['added_on'] = date("Y-m-d H:i:s");
 			$enter_data['added_by'] = $this->data['session_auid'];
-			$insert_status = $this->Common_model->add_operation(array('table' => 'state', 'data' => $enter_data));
-			if (!empty($insert_status)) {
+			$insertStatus = $this->Common_model->add_operation(array('table' => 'state', 'data' => $enter_data));
+			if (!empty($insertStatus)) {
 				$alert_message = '<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-check"></i> New Record Added Successfully </div>';
 			}
 

@@ -34,7 +34,7 @@ class Property_model extends CI_Model
 			// Otherwise, select detailed information about the property including state and country details
 			$this->db->select("ft.*,pt.name as property_type_name,pst.name as property_sub_type_name,pa.name as property_age_name,
 			bt.name as bhk_type_name,pft.name as plot_facing_type_name,dft.name as door_facing_type_name,gct.name as gated_community_type_name,
-			s.state_name,ci.city_name,l.location_name,l.pincode,s.name as state_name,ci.name as city_name,l.name as location_name ");
+			l.name as location_name,l.pincode,s.name as state_name,ci.name as city_name ");
 			// Select the name of the user who added the property
 			$this->db->select("(select au.name from admin_user as  au where au.id = ft.added_by) as added_by_name");
 			$this->db->select("(select au.name from admin_user as  au where au.id = ft.updated_by) as updated_by_name");

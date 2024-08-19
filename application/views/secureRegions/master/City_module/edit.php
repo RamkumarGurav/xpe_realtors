@@ -2,7 +2,7 @@
 $name = "";
 $city_code = "";
 $id = 0;
-$country_id = 0;
+$country_id = 1;
 $state_id = 0;
 $is_display = 1;
 $status = 1;
@@ -14,6 +14,7 @@ if (!empty($city_data)) {
 	$city_code = $city_data->city_code;
 	$status = $city_data->status;
 	$country_id = $city_data->country_id;
+	// $country_id = 1;
 	$state_id = $city_data->state_id;
 	$is_display = $city_data->is_display;
 
@@ -74,31 +75,33 @@ if (!empty($city_data)) {
 							<input type="hidden" name="redirect_type" id="redirect_type" value="" />
 
 							<div class="form-group row">
-								<div class="col-lg-3 col-md-4 col-sm-6">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Country <span
+								<div class="col-md-4 col-sm-6">
+									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">State <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-10">
-										<select type="text" class="form-control form-control-sm" required id="country_id"
-											onchange="get_state(this.value ,0)" name="country_id">
-											<option value="">Select Country</option>
-											<?php foreach ($country_data as $cd) {
+
+										<select type="text" class="form-control" id="state_id" name="state_id" style="width: 100%;">
+											<option value="">Select State</option>
+											<?php foreach ($state_data as $item) {
 												$selected = "";
-												if ($cd->country_id == $country_id) {
+												if ($item->id == 1) {
 													$selected = "selected";
 												}
 												?>
-												<option value="<?php echo $cd->country_id ?>" <?php echo $selected ?>>
-													<?php echo $cd->country_name ?>
-													<?php if ($cd->status != 1) {
+												<option value="<?php echo $item->id ?>" <?php echo $selected ?>>
+													<?php echo $item->name ?>
+													<?php if ($item->status != 1) {
 														echo " [Block]";
 													} ?>
 												</option>
 											<?php } ?>
 										</select>
+
+
 									</div>
 								</div>
 
-								<div class="col-lg-3 col-md-4 col-sm-6">
+								<!-- <div class="col-md-4 col-sm-6">
 									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">State <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-10">
@@ -106,18 +109,17 @@ if (!empty($city_data)) {
 											<option value="">Select State</option>
 										</select>
 									</div>
-								</div>
+								</div> -->
 
-								<div class="col-lg-3 col-md-4 col-sm-6">
+								<div class="col-md-4 col-sm-6">
 									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">City <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control form-control-sm" required id="name" name="name"
 											value="<?php echo $name ?>" placeholder="City">
-
 									</div>
 								</div>
-								<div class="col-lg-3 col-md-4 col-sm-6">
+								<div class="col-md-4 col-sm-6">
 									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">City Code <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;"></span></label>
 									<div class="col-sm-10">
@@ -127,7 +129,7 @@ if (!empty($city_data)) {
 								</div>
 							</div>
 							<div class="form-group row">
-								<div class="col-lg-3 col-md-4 col-sm-6">
+								<div class="col-md-4 col-sm-6">
 									<label for="radioSuccess1" class="col-sm-12 label_content px-2 py-0">Is Display?</label>
 									<div class="col-sm-10">
 										<div class="form-check" style="margin-top:12px">
@@ -152,7 +154,7 @@ if (!empty($city_data)) {
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-3 col-md-4 col-sm-6">
+								<div class="col-md-4 col-sm-6">
 									<label for="radioSuccess1" class="col-sm-12 label_content px-2 py-0">Status</label>
 									<div class="col-sm-10">
 										<div class="form-check" style="margin-top:12px">
@@ -218,32 +220,6 @@ if (!empty($city_data)) {
 		return true;
 	}
 
-	function get_state(country_id, state_id = 0) {
-		$('#loader1').show();
-		$("#state_id").html('');
-		if (country_id > 0) {
-			Pace.restart();
-			$.ajax({
-				url: "<?php echo MAINSITE_Admin . 'Ajax/get_state' ?>",
-				type: 'post',
-				dataType: "json",
-				data: { 'country_id': country_id, 'state_id': state_id, "<?php echo $csrf['name'] ?>": "<?php echo $csrf['hash'] ?>" },
-				success: function (response) {
-					$("#state_id").html(response.state_html);
-				},
-				error: function (request, error) {
-					toastrDefaultErrorFunc("Unknown Error. Please Try Again");
-					$("#quick_view_model").html('Unknown Error. Please Try Again');
-				}
-			});
-		}
 
-	}
-
-	<?php if (!empty($country_id) && !empty($state_id)) { ?>
-		window.addEventListener('load', function () {
-			get_state(<?php echo $country_id ?>, <?php echo $state_id ?>)
-		})
-	<?php } ?>
 
 </script>

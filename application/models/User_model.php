@@ -29,10 +29,8 @@ class User_model extends CI_Model
       // Otherwise, select detailed information about the property including state and country details
       $this->db->select("ft.*,pt.name as property_type_name,pst.name as property_sub_type_name,pa.name as property_age_name,
 			bt.name as bhk_type_name,pft.name as plot_facing_type_name,dft.name as door_facing_type_name,gct.name as gated_community_type_name,
-			s.state_name,ci.city_name,l.location_name,l.pincode ");
+			s.name as state_name,ci.name as city_name,l.name as location_name,l.pincode ");
       // Select the name of the user who added the property
-      $this->db->select("(select au.admin_user_name from admin_user as  au where au.admin_user_id = ft.added_by) as added_by_name "); // Select added_by user's name
-      $this->db->select("(select au.admin_user_name from admin_user as  au where au.admin_user_id = ft.updated_by) as updated_by_name "); // Select updated_by user's name
     }
 
     // From the property table (aliased as ft)
@@ -47,18 +45,18 @@ class User_model extends CI_Model
     $this->db->join("facing_type as  dft", "dft.id = ft.door_facing_type_id", "Left");
     $this->db->join("gated_community_type as gct", "gct.id = ft.gated_community_type_id", "Left");
 
-    $this->db->join("state as s", "s.state_id = ft.state_id", "Left");
-    $this->db->join("city as ci", "ci.city_id = ft.city_id", "Left");
-    $this->db->join("location as l", "l.location_id = ft.location_id", "Left");
+    $this->db->join("state as s", "s.id = ft.state_id", "Left");
+    $this->db->join("city as ci", "ci.id = ft.city_id", "Left");
+    $this->db->join("location as l", "l.id = ft.location_id", "Left");
 
 
 
     if (!empty($params['search_keyword'])) {
       $search_keyword = $params['search_keyword'];
       $this->db->group_start(); // Start grouping for OR conditions
-      $this->db->like('ci.city_name', $search_keyword);
-      $this->db->or_like('s.state_name', $search_keyword);
-      $this->db->or_like('l.location_name', $search_keyword);
+      $this->db->like('ci.name', $search_keyword);
+      $this->db->or_like('s.name', $search_keyword);
+      $this->db->or_like('l.name', $search_keyword);
       $this->db->or_like('l.pincode', $search_keyword);
       $this->db->group_end(); // End grouping for OR conditions
     }
@@ -179,12 +177,12 @@ class User_model extends CI_Model
 
     // If 'limit' and 'offset' are set in the $params array, limit the number of results and set the offset
     if (!empty($params['limit']) && !empty($params['offset'])) {
-      $this->db->limit($params['limit'], $params['offset']);
-    }
-    // If only 'limit' is set, just limit the number of results
-    else if (!empty($params['limit'])) {
+      $this->db->limit(!empty($params['limit']), $params['offset']);
+    } else if (!empty($params['limit'])) {
       $this->db->limit($params['limit']);
     }
+
+
 
     // Execute query and get results
     $query_get_list = $this->db->get();
@@ -228,9 +226,6 @@ class User_model extends CI_Model
 
       // Select all required fields and additional information
       $this->db->select("ft.* ");
-      $this->db->select("(select au.admin_user_name from admin_user as  au where au.admin_user_id = ft.added_by) as added_by_name "); // Select added_by user's name
-      $this->db->select("(select au.admin_user_name from admin_user as  au where au.admin_user_id = ft.updated_by) as updated_by_name "); // Select updated_by user's name
-      $this->db->select("(select au.admin_user_name from admin_user as  au where au.admin_user_id = ft.is_deleted_by) as is_deleted_by_name "); // Select updated_by user's name
     }
 
     // From admin_user table "ft" refers to "from table"

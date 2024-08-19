@@ -119,6 +119,261 @@ class User extends Main
 
 
 
+    $is_load_more = "";
+    $offset = "";
+    $limit = "";
+
+    $is_negotiable = "";
+    $is_display = 1;
+    $record_status = 1;
+
+
+
+
+    if (!empty($_REQUEST['search_keyword']))
+      $search_keyword = $_POST['search_keyword'];
+    else if (!empty($search_keyword))
+      $search_keyword = $search_keyword;
+
+
+    if (!empty($_REQUEST['field_name']))
+      $field_name = $_POST['field_name'];
+    else if (!empty($field_name))
+      $field_name = $field_name;
+    if (!empty($_REQUEST['field_value']))
+      $field_value = $_POST['field_value'];
+    else if (!empty($field_value))
+      $field_value = $field_value;
+
+
+
+    if (!empty($_POST['start_date']))
+      $start_date = $_POST['start_date'];
+    if (!empty($_POST['end_date']))
+      $end_date = $_POST['end_date'];
+
+
+    if (!empty($_GET['p_type'])) {
+      $property_type_id = $_GET['p_type'];
+    }
+    if (!empty($_POST['property_type_id']))
+      $property_type_id = $_POST['property_type_id'];
+    if (!empty($_POST['property_sub_type_id']))
+      $property_sub_type_id = $_POST['property_sub_type_id'];
+    if (!empty($_POST['property_age_id']))
+      $property_age_id = $_POST['property_age_id'];
+
+
+
+    if (!empty($_POST['state_id']))
+      $state_id = $_POST['state_id'];
+    if (!empty($_POST['city_id']))
+      $city_id = $_POST['city_id'];
+    if (!empty($_POST['location_id']))
+      $location_id = $_POST['location_id'];
+
+
+
+
+
+    if (!empty($_POST['sale_type']))
+      $sale_type = $_POST['sale_type'];
+    if (!empty($_POST['sale_duration_type']))
+      $sale_duration_type = $_POST['sale_duration_type'];
+    if (!empty($_POST['start_sale_amount']))
+      $start_sale_amount = $_POST['start_sale_amount'];
+    if (!empty($_POST['end_sale_amount']))
+      $end_sale_amount = $_POST['end_sale_amount'];
+
+
+
+    if (!empty($_POST['bhk_type_id']))
+      $bhk_type_id = $_POST['bhk_type_id'];
+    if (!empty($_POST['plot_facing_type_id']))
+      $plot_facing_type_id = $_POST['plot_facing_type_id'];
+    if (!empty($_POST['door_facing_type_id']))
+      $door_facing_type_id = $_POST['door_facing_type_id'];
+    if (!empty($_POST['plot_dimension_sqft']))
+      $plot_dimension_sqft = $_POST['plot_dimension_sqft'];
+    if (!empty($_POST['built_up_area']))
+      $built_up_area = $_POST['built_up_area'];
+    if (!empty($_POST['in_acres']))
+      $in_acres = $_POST['in_acres'];
+    if (!empty($_POST['in_guntas']))
+      $in_guntas = $_POST['in_guntas'];
+    if (!empty($_POST['gated_community_type_id']))
+      $gated_community_type_id = $_POST['gated_community_type_id'];
+
+
+
+    $offset = 0;
+    $limit = 1;
+
+    if (!empty($_POST['is_negotiable']))
+      $is_negotiable = $_POST['is_negotiable'];
+
+
+
+
+
+
+
+
+    $this->data['search_keyword'] = $search_keyword;
+    $this->data['field_name'] = $field_name;
+    $this->data['field_value'] = $field_value;
+
+    $this->data['start_date'] = $start_date;
+    $this->data['end_date'] = $end_date;
+
+
+    $this->data['property_type_id'] = $property_type_id;
+    $this->data['property_sub_type_id'] = $property_sub_type_id;
+    $this->data['property_age_id'] = $property_age_id;
+
+    $this->data['state_id'] = $state_id;
+    $this->data['city_id'] = $city_id;
+    $this->data['location_id'] = $location_id;
+
+
+    $this->data['sale_type'] = $sale_type;
+    $this->data['sale_duration_type'] = $sale_duration_type;
+    $this->data['start_sale_amount'] = $start_sale_amount;
+    $this->data['end_sale_amount'] = $end_sale_amount;
+
+    $this->data['bhk_type_id'] = $bhk_type_id;
+    $this->data['plot_facing_type_id'] = $plot_facing_type_id;
+    $this->data['door_facing_type_id'] = $door_facing_type_id;
+    $this->data['plot_dimension_sqft'] = $plot_dimension_sqft;
+    $this->data['built_up_area'] = $built_up_area;
+    $this->data['in_acres'] = $in_acres;
+    $this->data['in_guntas'] = $in_guntas;
+    $this->data['gated_community_type_id'] = $gated_community_type_id;
+
+
+
+    $this->data['offset'] = $offset;
+    $this->data['limit'] = $limit;
+
+
+
+    $this->data['is_negotiable'] = $is_negotiable;
+
+    $search['search_keyword'] = $search_keyword;
+    $search['field_name'] = $field_name;
+    $search['field_value'] = $field_value;
+
+    $search['start_date'] = $start_date;
+    $search['end_date'] = $end_date;
+
+
+    $search['property_type_id'] = $property_type_id;
+    $search['property_sub_type_id'] = $property_sub_type_id;
+    $search['property_age_id'] = $property_age_id;
+
+    $search['state_id'] = $state_id;
+    $search['city_id'] = $city_id;
+    $search['location_id'] = $location_id;
+
+
+    $search['sale_type'] = $sale_type;
+    $search['sale_duration_type'] = $sale_duration_type;
+    $search['start_sale_amount'] = $start_sale_amount;
+    $search['end_sale_amount'] = $end_sale_amount;
+
+    $search['bhk_type_id'] = $bhk_type_id;
+    $search['plot_facing_type_id'] = $plot_facing_type_id;
+    $search['door_facing_type_id'] = $door_facing_type_id;
+    $search['plot_dimension_sqft'] = $plot_dimension_sqft;
+    $search['built_up_area'] = $built_up_area;
+    $search['in_acres'] = $in_acres;
+    $search['in_guntas'] = $in_guntas;
+    $search['gated_community_type_id'] = $gated_community_type_id;
+
+    $search['offset'] = $offset;
+    $search['limit'] = $limit;
+
+
+    $search['is_negotiable'] = $is_negotiable;
+    $search['is_display'] = 1;
+    $search['record_status'] = 1;
+
+
+
+    // $search['search_for'] = "count";
+
+    $this->data['property_data'] = $this->User_model->get_property_data(
+      $search
+    );
+
+
+
+
+
+
+
+    $this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "id > 0 and status = 1 and is_display=1", "order_by" => "name ASC"));
+    $this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "id > 0 and status = 1 and is_display=1", "order_by" => "name ASC"));
+    $this->data['location_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "id > 0 and status = 1 and is_display=1", "order_by" => "name ASC"));
+    $this->data['property_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
+    $this->data['property_sub_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_sub_type', 'where' => "id > 0  and status = 1", "order_by" => "name ASC"));
+    $this->data['property_age_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_age', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
+    $this->data['facing_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'facing_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
+    $this->data['bhk_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'bhk_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
+    $this->data['gated_community_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'gated_community_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
+
+
+
+
+    parent::get_header('header', $this->data);
+    $this->load->view('search_results', $this->data);
+    parent::get_footer('footer', $this->data);
+  }
+
+
+
+  function load_more_property()
+  {
+
+    $search = array();
+    $search_keyword = '';
+    $field_name = '';
+    $field_value = '';
+
+    $start_date = '';
+    $end_date = '';
+
+
+    $property_type_id = "";
+
+
+    $property_sub_type_id = "";
+    $property_age_id = "";
+
+
+    $state_id = "";
+    $city_id = "";
+    $location_id = "";
+
+    $sale_type = "";
+    $sale_duration_type = "";
+    $start_sale_amount = "";
+    $end_sale_amount = "";
+
+    $bhk_type_id = "";
+    $plot_facing_type_id = "";
+    $door_facing_type_id = "";
+    $plot_dimension_sqft = "";
+    $built_up_area = "";
+    $in_acres = "";
+    $in_guntas = "";
+    $gated_community_type_id = "";
+
+
+
+    $offset = "";
+    $limit = "";
+
     $is_negotiable = "";
     $is_display = 1;
     $record_status = 1;
@@ -204,6 +459,9 @@ class User extends Main
 
 
 
+    $limit = 1;
+    if (!empty($_POST['offset']))
+      $offset = $_POST['offset'];
 
 
     if (!empty($_POST['is_negotiable']))
@@ -247,6 +505,11 @@ class User extends Main
     $this->data['in_guntas'] = $in_guntas;
     $this->data['gated_community_type_id'] = $gated_community_type_id;
 
+
+    $this->data['offset'] = $offset;
+    $this->data['limit'] = $limit;
+
+
     $this->data['is_negotiable'] = $is_negotiable;
 
     $search['search_keyword'] = $search_keyword;
@@ -280,9 +543,15 @@ class User extends Main
     $search['in_guntas'] = $in_guntas;
     $search['gated_community_type_id'] = $gated_community_type_id;
 
+    $search['offset'] = $offset;
+    $search['limit'] = $limit;
+
     $search['is_negotiable'] = $is_negotiable;
     $search['is_display'] = 1;
     $search['record_status'] = 1;
+
+
+
 
     // $search['search_for'] = "count";
 
@@ -292,24 +561,15 @@ class User extends Main
 
 
 
-    $this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "state_id > 0 and status = 1 and is_display=1", "order_by" => "state_name ASC"));
-    $this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "city_id > 0 and status = 1 and is_display=1", "order_by" => "city_name ASC"));
-    $this->data['location_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "location_id > 0 and status = 1 and is_display=1", "order_by" => "location_name ASC"));
-    $this->data['property_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
-    $this->data['property_sub_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_sub_type', 'where' => "id > 0  and status = 1", "order_by" => "name ASC"));
-    $this->data['property_age_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_age', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
-    $this->data['facing_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'facing_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
-    $this->data['bhk_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'bhk_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
-    $this->data['gated_community_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'gated_community_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
 
+    // if (count($this->data['property_data']) > 0) {
+    //   echo json_encode($this->load->view('template/load_more_property', $this->data));
+    // } else {
+    //   echo 'NO';
+    // }
 
-
-
-    parent::get_header('header', $this->data);
-    $this->load->view('search_results', $this->data);
-    parent::get_footer('footer', $this->data);
+    echo json_encode($this->data['property_data']);
   }
-
 
   function add_input_fields()
   {
@@ -386,9 +646,6 @@ class User extends Main
     $this->load->view('property_details', $this->data);
     parent::get_footer('footer', $this->data);
   }
-
-
-
 
 
   function host_captcha_validation()
@@ -482,130 +739,16 @@ class User extends Main
     //echo '<pre>'; print_r($_POST); echo '</pre>'; exit; 
 
     $this->host_captcha_validation();
+
+
+
     //exit;
-    //echo "2";
     if (
-      !empty($_POST['enq_type']) && !empty($_POST['name_contact_us']) && !empty($_POST['email_contact_us']) && !empty($_POST['contact_contact_us'])
-      && !empty($_POST['qualification_contact_us']) && !empty($_POST['appliedfor_contact_us']) && !empty($_POST['experience_contact_us']) && $_SERVER['REQUEST_METHOD'] == 'POST'
+      !empty($_POST['enq_type']) && !empty($_POST['name_contact_us']) && !empty($_POST['email_contact_us'])
+      && !empty($_POST['contact_contact_us']) && !empty($_POST['message_contact_us']) && !empty($_POST['service_contact_us'])
+      && !empty($_POST['consent_contact_us'])
+      && $_SERVER['REQUEST_METHOD'] == 'POST'
     ) {
-      $full_name = '';
-      if (isset($_POST['name_contact_us']) && !empty($_POST['name_contact_us'])) {
-        $full_name = trim($_POST['name_contact_us']);
-      }
-
-      $pagelink = '';
-      if (isset($_POST['pagelink']) && !empty($_POST['pagelink'])) {
-        $pagelink = trim($_POST['pagelink']);
-      }
-
-      $email = '';
-      if (isset($_POST['email_contact_us']) && !empty($_POST['email_contact_us'])) {
-        $email = trim($_POST['email_contact_us']);
-      }
-
-      $contact = '';
-      if (isset($_POST['contact_contact_us']) && !empty($_POST['contact_contact_us'])) {
-        $contact = trim($_POST['contact_contact_us']);
-      }
-
-      $qualification = '';
-      if (isset($_POST['qualification_contact_us']) && !empty($_POST['qualification_contact_us'])) {
-        $qualification = trim($_POST['qualification_contact_us']);
-      }
-
-      $appliedfor = '';
-      if (isset($_POST['appliedfor_contact_us']) && !empty($_POST['appliedfor_contact_us'])) {
-        $appliedfor = trim($_POST['appliedfor_contact_us']);
-      }
-
-      $experience = '';
-      if (isset($_POST['experience_contact_us']) && !empty($_POST['experience_contact_us'])) {
-        $experience = trim($_POST['experience_contact_us']);
-      }
-
-      $ip_address = $this->Common_model->get_client_ip();
-
-      $userfile = $mail_userfile = '';
-
-      if (isset($_FILES['userfile_contact_us']['name']) && !empty($_FILES['userfile_contact_us']['name']))
-        $userfile = $_FILES['userfile_contact_us']['name'];
-      if (!empty($userfile)) {
-        $temp_var = explode(".", strtolower($userfile));
-        $timage_ext = end($temp_var);
-
-        $temp_name = 'RESUME-';
-        if (!empty($full_name)) {
-          $temp_full_name = str_replace(' ', '_', $full_name);
-          $temp_name = ucwords($temp_full_name) . '-RESUME-';
-        }
-        // echo "UploadedFiles - " . _uploaded_files_;
-        $main_img = $temp_name . $this->n_digit_random(4) . '.' . $timage_ext;
-        // echo "main_img : $main_img";
-        $target_folder_name = "career_resume";
-        if (!is_dir(_uploaded_temp_files_ . $target_folder_name)) {
-          mkdir(_uploaded_temp_files_ . './' . $target_folder_name, 0777, TRUE);
-
-        }
-        // move_uploaded_file($_FILES['userfile_contact_us']['tmp_name'], "E:/xampp/htdocs/xampp/MARS/steelagebuildingsystem/assets/uploads/" . $main_img);
-
-        move_uploaded_file($_FILES['userfile_contact_us']['tmp_name'], _uploaded_temp_files_ . $target_folder_name . "/" . $main_img);
-        //$mail_userfile = MAINSITE . $target_folder_name . "/" . $main_img;
-        $mail_userfile = _uploaded_files_ . $target_folder_name . "/" . $main_img;
-      }
-
-      // $ip_address = $this->Common_model->get_client_ip();
-      $date = date('D dS M, Y h:i a');
-
-      $mailMessage = file_get_contents(APPPATH . 'mailer/career.html');
-      $mailMessage = preg_replace('/\\\\/', '', $mailMessage); //Strip backslashes
-      $mailMessage = str_replace("#enq_date#", stripslashes($date), $mailMessage);
-      $mailMessage = str_replace("#name#", stripslashes($full_name), $mailMessage);
-      $mailMessage = str_replace("#contact#", stripslashes($contact), $mailMessage);
-      $mailMessage = str_replace("#qualification#", stripslashes($qualification), $mailMessage);
-      $mailMessage = str_replace("#appliedfor#", stripslashes($appliedfor), $mailMessage);
-      $mailMessage = str_replace("#experience#", stripslashes($experience), $mailMessage);
-      $mailMessage = str_replace("#email#", stripslashes($email), $mailMessage);
-      $mailMessage = str_replace("#ip_address#", stripslashes($ip_address), $mailMessage);
-      $mailMessage = str_replace("#page_url#", stripslashes($pagelink), $mailMessage);
-      $mailMessage = str_replace("#mainsite#", MAINSITE, $mailMessage);
-      $mailMessage = str_replace("#company_name#", _project_complete_name_, $mailMessage);
-
-
-      $to_name = $from_name = "Steel Age Building System";
-      $subject = "New Inquiry From www.steelagebuildingsystem.com";
-      if ($_POST['enq_type'] == 'careers') {
-        $subject = "New Career Contact Inquiry - " . $from_name;
-      }
-      //$address = $from_email = "clientnoreply@webdesigncompanybangalore.com";
-      $address = $from_email = "clientnoreply@webdesigncompanybangalore.com";
-      $to = "abhishek.khandelwal82@gmail.com";
-      // $to = "steelagebuildingsystem@gmail.com";
-
-
-
-
-
-      $mailStatus = $this->Common_model->send_mail(
-        array(
-          "template" => $mailMessage,
-          "subject" => $subject,
-          "to" => "$to",
-          "name" => $to_name,
-          "attachment" => $main_img
-        )
-      );
-
-
-
-      //exit;
-      $_SESSION['is_thank_you_page'] = 1;
-      $location = MAINSITE . 'thank-you';
-
-      //header('Location: '.$location);
-      //exit;
-      echo "<script>location.href='thank-you'</script>";
-      die();
-    } else if (!empty($_POST['enq_type']) && !empty($_POST['name_contact_us']) && !empty($_POST['email_contact_us']) && !empty($_POST['contact_contact_us']) && !empty($_POST['message_contact_us']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
       //echo "2";
       if (isset($_POST['message_contact_us']) && !empty($_POST['message_contact_us'])) {
         if (preg_match('/http|www/i', $_POST['message_contact_us'])) {
@@ -619,7 +762,7 @@ class User extends Main
 
       $full_name = '';
       if (isset($_POST['name_contact_us']) && !empty($_POST['name_contact_us'])) {
-        $full_name = trim($_POST['name_contact_us']);
+        $enquiry_input_data['name'] = $full_name = trim($_POST['name_contact_us']);
       }
 
       $pagelink = '';
@@ -629,18 +772,33 @@ class User extends Main
 
       $email = '';
       if (isset($_POST['email_contact_us']) && !empty($_POST['email_contact_us'])) {
-        $email = trim($_POST['email_contact_us']);
+        $enquiry_input_data['email'] = $email = trim($_POST['email_contact_us']);
       }
 
       $contact = '';
       if (isset($_POST['contact_contact_us']) && !empty($_POST['contact_contact_us'])) {
-        $contact = trim($_POST['contact_contact_us']);
+        $enquiry_input_data['contactno'] = $contact = trim($_POST['contact_contact_us']);
       }
+
+      $service = '';
+      if (isset($_POST['service_contact_us']) && !empty($_POST['service_contact_us'])) {
+        $enquiry_input_data['service'] = $service = trim($_POST['service_contact_us']);
+      }
+
+
 
       $message = '';
       if (isset($_POST['message_contact_us']) && !empty($_POST['message_contact_us'])) {
-        $message = trim($_POST['message_contact_us']);
+        $enquiry_input_data['message'] = $message = trim($_POST['message_contact_us']);
       }
+
+      $consent = '';
+      if (isset($_POST['consent_contact_us']) && !empty($_POST['consent_contact_us'])) {
+        $enquiry_input_data['is_consent'] = $consent = trim($_POST['consent_contact_us']);
+      }
+
+      $enquiry_input_data['added_on'] = date("Y-m-d H:i:s");
+
       $ip_address = $this->Common_model->get_client_ip();
       $date = date('D dS M, Y h:i a');
 
@@ -650,6 +808,7 @@ class User extends Main
       $mailMessage = str_replace("#name#", stripslashes($full_name), $mailMessage);
       $mailMessage = str_replace("#contact#", stripslashes($contact), $mailMessage);
       $mailMessage = str_replace("#email#", stripslashes($email), $mailMessage);
+      $mailMessage = str_replace("#service#", stripslashes($service), $mailMessage);
       $mailMessage = str_replace("#ip_address#", stripslashes($ip_address), $mailMessage);
       $mailMessage = str_replace("#message#", stripslashes($message), $mailMessage);
       $mailMessage = str_replace("#page_url#", stripslashes($pagelink), $mailMessage);
@@ -657,27 +816,41 @@ class User extends Main
       $mailMessage = str_replace("#company_name#", _project_complete_name_, $mailMessage);
 
 
-      $to_name = $from_name = "Steel Age Building System";
-      $subject = "New Inquiry From www.steelagebuildingsystem.com";
+
+
+
+      $to_name = $from_name = "Pe Realtors";
+      $subject = "New Inquiry From www.perealtors.com";
       if ($_POST['enq_type'] == 'career') {
         $subject = "New Career Contact Inquiry - " . $from_name;
       }
       //$address = $from_email = "clientnoreply@webdesigncompanybangalore.com";
       $address = $from_email = "clientnoreply@webdesigncompanybangalore.com";
       $to = "abhishek.khandelwal82@gmail.com";
-      // $to = "steelagebuildingsystem@gmail.com";
+      // $to = "ramkumarsgurav@gmail.com";
 
 
-      $mailStatus = $this->Common_model->send_mail(array("template" => $mailMessage, "subject" => $subject, "to" => "$to", "name" => $to_name));
+
+      $mailStatus = $this->Common_model->send_mail(array(
+        "template" => $mailMessage,
+        "subject" => $subject,
+        "to" => "$to",
+        "name" => $to_name,
+        "enquiry_input_data" => $enquiry_input_data
+      ));
+
+
+
       //exit;
       $_SESSION['is_thank_you_page'] = 1;
       $location = MAINSITE . 'thank-you';
 
       //header('Location: '.$location);
       //exit;
-      echo "<script>location.href='thank-you'</script>";
+      echo "<script>location.href='{$location}'</script>";
       die();
     } else {
+      $_SESSION['is_error_page'] = 1;
       echo "<script>location.href='error'</script>";
       die();
     }
@@ -697,6 +870,125 @@ class User extends Main
     return rand(pow(10, $digits - 1) - 1, pow(10, $digits) - 1);
   }
 
+
+  function ajax_insert_enquiry()
+  {
+    $page = trim($_POST['page']);
+
+    ini_set('display_errors', 'Off');
+    ini_set('error_reporting', E_ALL);
+    date_default_timezone_set('Asia/Kolkata');
+    $timestamp = date("Y-m-d H:i:s");
+
+    //echo '<pre>'; print_r($_POST); echo '</pre>'; exit; 
+
+    exit;
+    if (true) {
+      if (isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] != '') {
+        $link = $_SERVER['HTTP_REFERER'];
+        $link_array = explode('/', $link);
+        $page_action = end($link_array);
+        $parts = parse_url($link);
+        $page_host = $parts['host'];
+        if (strpos($parts["host"], 'www.') !== false) { //echo 'yes<br>';
+          $parts1 = explode('www.', $parts["host"]);
+          $page_host = $parts1[1];
+        }
+
+
+        if ($page_host != _mainsite_hostname_) {
+
+          echo '<script language="javascript">';
+          echo 'alert("Host validation failed! Please try again.")';
+          echo '</script>';
+          REDIRECT(MAINSITE . $page);
+          die();
+        }
+      } else {
+        echo '<script language="javascript">';
+        echo 'alert("Error: HTTP_REFERER failed! Please try again.")';
+        echo '</script>';
+        REDIRECT(MAINSITE . $page);
+        die();
+      }
+
+
+
+      $request = '';
+      if (isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
+        $param['secret'] = _google_recaptcha_secret_key_;
+        $param['response'] = $_POST['g-recaptcha-response'];
+        $param['remoteip'] = $_SERVER['REMOTE_ADDR'];
+        foreach ($param as $key => $val) {
+          $request .= $key . "=" . $val;
+          $request .= "&";
+        }
+        $request = substr($request, 0, strlen($request) - 1);
+        $url = "https://www.google.com/recaptcha/api/siteverify?" . $request;
+        //echo $url; exit;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $result_data = curl_exec($ch);
+        if (curl_exec($ch) === false) {
+          $error_info = curl_error($ch);
+        }
+        curl_close($ch);
+
+        $response = json_decode($result_data);
+        if ($response->success != 1) {
+          echo '<script language="javascript">';
+          echo 'alert("google recaptcha validation failed! Please try again.")';
+          echo '</script>';
+          REDIRECT(MAINSITE . $page);
+          die();
+        }
+      } else {
+        echo '<script language="javascript">';
+        echo 'alert("Error: google recaptcha post validation failed! Please try again.")';
+        echo '</script>';
+        REDIRECT(MAINSITE . $page);
+        die();
+      }
+    }
+
+
+    $enter_data['name'] = trim($_POST['name']);
+    $enter_data['contactno'] = trim($_POST['contactno']);
+    $enter_data['email'] = trim($_POST['email']);
+    $enter_data['subject'] = trim($_POST['subject']);
+    $enter_data['description'] = trim($_POST['description']);
+    $enter_data['status'] = 1;
+
+    $enter_data['added_on'] = date("Y-m-d H:i:s");
+
+    $enquiry_result = $insertStatus = $this->Common_model->add_operation(array('table' => 'enquiry', 'data' => $enter_data));
+
+    $response['message'] = '<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <i class="icon fas fa-ban"></i> Something went wrong. Please try again.
+    </div>';
+
+    if (!empty($enquiry_result)) {
+
+      // $this->send_email_for_enquiry($enter_data);
+      //   $this->session->set_flashdata('alert_message', '<div class="alert alert-success alert-dismissible">
+      // <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      // <i class="icon fas fa-check"></i>Thank You.
+      // </div>');
+      //redirect to thank you page
+      REDIRECT(MAINSITE . "/thank-you");
+      exit;
+    } else {
+      //redirect to the same page
+      REDIRECT(MAINSITE . $page);
+    }
+
+  }
 
 
 

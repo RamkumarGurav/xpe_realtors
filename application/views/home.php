@@ -1,3 +1,51 @@
+<style>
+  input.parsley-success,
+  select.parsley-success,
+  textarea.parsley-success {
+    color: #468847;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+  }
+
+  input.parsley-error,
+  select.parsley-error,
+  textarea.parsley-error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border: 1px solid #eed3d7;
+    margin-bottom: 5px;
+  }
+
+  .parsley-errors-list {
+    margin: 2px 0 3px;
+    padding: 0;
+    list-style-type: none;
+    font-size: 0.9em;
+    line-height: 0.9em;
+    opacity: 0;
+    transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    color: #d89e29;
+  }
+
+  .parsley-errors-list.filled {
+    opacity: 1;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  ul.parsley-errors-list {
+    order: 2;
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+</style>
+
 <!-- Header Container / End -->
 <section class="header-image home-18 d-flex align-items-center" id="slider">
   <div class="container">
@@ -26,7 +74,7 @@
                     <div class="search-box">
                       <form name="search_results_form" id="search_results_form" action="<?= MAINSITE ?>search-results"
                         accept-charset="utf-8" autocomplete="off" enctype="multipart/form-data" method="POST">
-                        <input type="hidden" name="sale_type" value="">
+                        <input type="hidden" name="sale_type" value="3">
                         <input type="text" name="search_keyword" id="search_keyword"
                           placeholder="City, Neighborhood, Address, Postal Code, School District">
                         <button type="submit" class="icon">
@@ -43,7 +91,7 @@
                     <div class="search-box">
                       <form name="search_results_form" id="search_results_form" action="<?= MAINSITE ?>search-results"
                         accept-charset="utf-8" autocomplete="off" enctype="multipart/form-data" method="POST">
-                        <input type="hidden" name="sale_type" value="2">
+                        <input type="hidden" name="sale_type" value="1">
                         <input type="text" name="search_keyword" id="search_keyword"
                           placeholder="City, Neighborhood, Address, Postal Code, School District">
                         <button type="submit" class="icon">
@@ -104,9 +152,13 @@
                       </a>
                     </div>
                     <div class="button-effect">
-                      <a href="<?= $item->youtube_link ?>" target="_blank"> <span href="#" class="btn "><i
-                            class="fab fa-youtube"></i></span><span style="color:#fff">Youtube</span></a>
+                      <a href="<?= $item->youtube_link ?>" class="<?= $item->youtube_link ? "" : "d-none" ?>"
+                        target="_blank">
+                        <span href="#" class="btn "><i class="fab fa-youtube"></i></span><span
+                          style="color:#fff">Youtube</span></a>
+
                     </div>
+
                   </div>
                   <!-- homes content -->
                   <div class="homes-content">
@@ -742,35 +794,48 @@
             color: #fff;
             font-weight: 600;text-tranform:none !important">Log your <span style="color:#d89e29">requirement</span></h1>
          </div> -->
-          <form method="get">
+          <form name="enqForm" id="Contact-us" action="<?= MAINSITE ?>do_enquiry" onSubmit="submitForm(event)"
+            novalidate="novalidate" accept-charset="utf-8" autocomplete="off" enctype="multipart/form-data"
+            class="contact-one__form contact-one-validated" method="POST" data-parsley-validate>
+            <input type="hidden" name="enq_type" value="contact_us">
+            <input type="hidden" name="pagelink" value="">
             <div class="row d-flex align-items-center  mt-">
               <div class="col-lg-6">
                 <div class="filter-item ">
-                  <input type="text" placeholder="Name">
+                  <input type="text" class="form" id="Contact-us-name" name="name_contact_us"
+                    pattern="(?=.*[A-Za-z])[A-Za-z\s]*" required="required" placeholder="Your Name"
+                    data-parsley-required-message="Name is required" />
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="filter-item ">
-                  <input type="email" placeholder="Email Id">
+                  <input type="email" class="form" id="Contact-us-email" name="email_contact_us" required="required"
+                    placeholder="Email" data-parsley-required-message="E-mail address is required"
+                    data-parsley-type="email" data-parsley-type-message="Please enter valid e-mail address" />
                 </div>
               </div>
             </div>
             <div class="row d-flex align-items-center  mt-">
               <div class="col-lg-6">
                 <div class="filter-item ">
-                  <input type="text" placeholder="Phone Number">
+                  <input type="text" class="form" id="Contact-us-contact" name="contact_contact_us" maxlength="10"
+                    pattern="[0-9\\s]{10,10}" required="required" placeholder="Mobile"
+                    data-parsley-required-message="Contact number is required" data-parsley-type="integer"
+                    data-parsley-type-message="Please enter valid mobile number" />
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="filter-item ">
-                  <select>
-                    <option> Select a Service</option>
-                    <option> Buying a property</option>
-                    <option> Selling a property</option>
-                    <option> I have property to rent out</option>
-                    <option> I need rental property</option>
-                    <option> Property Document related</option>
-                    <option> Property Legal Service
+                  <select required="required" placeholder="Select a Service" id="Contact-us-service"
+                    name="service_contact_us" required="required"
+                    data-parsley-required-message="Please Select a Service">
+                    <option value=""> Select a Service</option>
+                    <option value="Buying a property"> Buying a property</option>
+                    <option value="Selling a property">Selling a property</option>
+                    <option value="I have property to rent out"> I have property to rent out</option>
+                    <option value="I need rental property"> I need rental property</option>
+                    <option value="Property Document related"> Property Document related</option>
+                    <option value="Property Legal Service"> Property Legal Service
                     </option>
                   </select>
                   <!-- <textarea placeholder="Requirement" style="height: 50px;"></textarea> -->
@@ -780,23 +845,30 @@
             <div class="row d-flex align-items-center  mt-">
               <div class="col-lg-12">
                 <div class="filter-item ">
-                  <textarea placeholder="Requirement" style="height: 150px;"></textarea>
+                  <textarea class="form textarea" id="Contact-us-message" name="message_contact_us" required="required"
+                    placeholder="Enter the Message" data-parsley-required-message="Message/Requirement is required"
+                    data-parsley-minlength="10" data-parsley-trigger="keyup"
+                    data-parsley-minlength-message="You need to enter at least a 10 character message.."></textarea>
                 </div>
               </div>
             </div>
             <div class="row d-flex align-items-center  mt-">
               <div class="col-lg-12">
                 <div class="filter-item d-flex align-items-start justify-content-start">
-                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" style="margin-top: 5px">
-                  <label for="vehicle1" style="color: #fff !important"> By checking this check box, you are providing
-                    your consent to PE-Realtors, they may contact you on the telephone number and may send marketing
-                    calls and texts to you using an automated system for selection or dialling of numbers or
-                    pre-recorded or artificial voice messages that relate to real estate products or services.</label>
+                  <input type="checkbox" id="Contact-us-consent" name="consent_contact_us" data-parsley-checkmin="1"
+                    required data-parsley-required-message="Consent is required" value="1" style="margin-top: 5px">
+                  <label for="terms" style="color: #fff !important"> By checking this check box, you are
+                    providing your consent to PE-Realtors, they may contact you on the telephone number and
+                    may send marketing calls and texts to you using an automated system for selection or
+                    dialling of numbers or pre-recorded or artificial voice messages that relate to real
+                    estate products or services.</label>
                 </div>
               </div>
             </div>
             <div class="filter-item">
-              <input type="submit" class="button alt mb-0" value="Submit" />
+              <button type="submit" data-callback="onSubmit" data-sitekey="<?= _google_recaptcha_site_key_ ?>"
+                data-wow-duration="1s" data-action="submit" class="g-recaptcha thm-btn contact-one__btn">Send a
+                message</button>
             </div>
           </form>
         </div>

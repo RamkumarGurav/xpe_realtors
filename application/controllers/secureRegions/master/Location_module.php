@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-require_once (APPPATH . "controllers/secureRegions/Main.php");
+require_once(APPPATH . "controllers/secureRegions/Main.php");
 class Location_module extends Main
 {
 
@@ -169,8 +169,8 @@ class Location_module extends Main
 		$search['limit'] = $per_page;
 		$search['offset'] = $offset;
 
-		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "state_id > 0", "order_by" => "state_name ASC"));
-		$this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "city_id > 0", "order_by" => "city_name ASC"));
+		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['location_data'] = $this->Location_model->get_location_data($search);
 
 
@@ -192,7 +192,7 @@ class Location_module extends Main
 		}
 
 		if ($this->data['user_access']->export_data != 1) {
-			$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Export " . $user_access->module_name);
+			$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Export " . $user_access->name);
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
 
@@ -254,14 +254,14 @@ class Location_module extends Main
 	}
 
 	//using
-	function view($location_id = "")
+	function view($id = "")
 	{
 		$this->data['page_type'] = "list";
 		$user_access = $this->data['user_access'] = $this->data['User_auth_obj']->check_user_access(array("module_id" => $this->data['page_module_id']));
 
 
-		// If no location_id is provided
-		if (empty($location_id)) {
+		// If no id is provided
+		if (empty($id)) {
 			// Set an alert message for the session
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again. anubhav</div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
@@ -281,11 +281,11 @@ class Location_module extends Main
 		$this->data['page_is_master'] = $this->data['user_access']->is_master;//this is for making left menu active
 		$this->data['page_parent_module_id'] = $this->data['user_access']->parent_module_id;
 
-		// Get location data using the provided location_id
-		$this->data['location_data'] = $this->Location_model->get_location_data(array("location_id" => $location_id));
+		// Get location data using the provided id
+		$this->data['location_data'] = $this->Location_model->get_location_data(array("id" => $id));
 
-		// Check again if no location_id is provided (redundant check)
-		if (empty($location_id)) {
+		// Check again if no id is provided (redundant check)
+		if (empty($id)) {
 			// Set an alert message for the session
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again. anubhav</div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
@@ -307,7 +307,7 @@ class Location_module extends Main
 
 	//using
 	//method that loads the view of add location and update location page
-	function edit($location_id = "")
+	function edit($id = "")
 	{
 		$this->data['page_type'] = "list";
 		$user_access = $this->data['user_access'] = $this->data['User_auth_obj']->check_user_access(array("module_id" => $this->data['page_module_id']));
@@ -316,31 +316,31 @@ class Location_module extends Main
 		if (empty($this->data['user_access'])) {
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
-		if (empty($location_id)) {
+		if (empty($id)) {
 			if ($user_access->add_module != 1) {
-				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->module_name);
+				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
-		if (!empty($location_id)) {
+		if (!empty($id)) {
 			if ($user_access->update_module != 1) {
-				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->module_name);
+				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
 
 
 
-		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "state_id > 0", "order_by" => "state_name ASC"));
-		$this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "city_id > 0", "order_by" => "city_name ASC"));
+		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "id > 0", "order_by" => "name ASC"));
 
 		// Assigning additional data for the view
 		$this->data['page_is_master'] = $this->data['user_access']->is_master;//this is for making left menu active
 		$this->data['page_parent_module_id'] = $this->data['user_access']->parent_module_id;
 
 
-		if (!empty($location_id)) {
-			$this->data['location_data'] = $this->Location_model->get_location_data(array("location_id" => $location_id));
+		if (!empty($id)) {
+			$this->data['location_data'] = $this->Location_model->get_location_data(array("id" => $id));
 			if (empty($this->data['location_data'])) {
 				$this->session->set_flashdata('alert_message', '<div class="alert alert-danger alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -366,7 +366,7 @@ class Location_module extends Main
 
 
 		// Validate essential form fields; if empty, set an error message and redirect
-		if (empty($_POST['location_name']) && empty($_POST['city_id']) && empty($_POST['state_id'])) {
+		if (empty($_POST['name']) && empty($_POST['city_id']) && empty($_POST['state_id'])) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close"
 							data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again.</div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
@@ -374,8 +374,8 @@ class Location_module extends Main
 			exit;
 		}
 
-		// Retrieve location_id from the form submission
-		$location_id = $_POST['location_id'];
+		// Retrieve id from the form submission
+		$id = $_POST['id'];
 
 
 		// Redirect to access denied page if user access is not defined
@@ -383,43 +383,43 @@ class Location_module extends Main
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
 
-		// Check if the user has permission to add a location (if location_id is empty)
-		if (empty($location_id)) {
+		// Check if the user has permission to add a location (if id is empty)
+		if (empty($id)) {
 			if ($user_access->add_module != 1) {
-				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->module_name);
+				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
 
-		// Check if the user has permission to update a location (if location_id is not empty)
-		if (!empty($location_id)) {
+		// Check if the user has permission to update a location (if id is not empty)
+		if (!empty($id)) {
 			if ($user_access->update_module != 1) {
-				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->module_name);
+				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
 
 		// Assign form data to variables and trim whitespace
-		$location_name = trim($_POST['location_name']);
+		$name = trim($_POST['name']);
 		$pincode = trim($_POST['pincode']);
 		$city_id = trim($_POST['city_id']);
 		$state_id = trim($_POST['state_id']);
 		$is_display = trim($_POST['is_display']);
 		$status = trim($_POST['status']);
 
-		// Check if a location with the same name already exists in the same country and state but with a different location_id
-		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "location_name =\"$location_name\" and pincode = '$pincode' and location_id != $location_id and city_id = $city_id and state_id = $state_id"));
+		// Check if a location with the same name already exists in the same country and state but with a different id
+		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "name =\"$name\" and pincode = '$pincode' and id != $id and city_id = $city_id and state_id = $state_id"));
 
 		// If the location exists, set an error message and redirect to the edit page
 		if (!empty($is_exist)) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Location already exist in database.</div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
-			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/edit/" . $location_id);
+			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/edit/" . $id);
 			exit;
 		}
 
 		// Prepare data for insertion or update
-		$enter_data['location_name'] = getCleanText($location_name);
+		$enter_data['name'] = getCleanText($name);
 		$enter_data['pincode'] = getCleanText($pincode);
 		$enter_data['state_id'] = $state_id;
 		$enter_data['city_id'] = $city_id;
@@ -432,11 +432,11 @@ class Location_module extends Main
 		 class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban">
 		 </i> Something Went Wrong Please Try Again. </div>';
 
-		// Update operation if location_id is not empty
-		if (!empty($location_id)) {
+		// Update operation if id is not empty
+		if (!empty($id)) {
 			$enter_data['updated_on'] = date("Y-m-d H:i:s");
 			$enter_data['updated_by'] = $this->data['session_auid'];
-			$insertStatus = $this->Common_model->update_operation(array('table' => 'location', 'data' => $enter_data, 'condition' => "location_id = $location_id"));
+			$insertStatus = $this->Common_model->update_operation(array('table' => 'location', 'data' => $enter_data, 'condition' => "id = $id"));
 
 			// Set success message if update is successful
 			if (!empty($insertStatus)) {
@@ -445,7 +445,7 @@ class Location_module extends Main
 				</i> Record Updated Successfully </div>';
 			}
 
-			// Insert operation if location_id is empty
+			// Insert operation if id is empty
 		} else {
 			$enter_data['added_on'] = date("Y-m-d H:i:s");
 			$enter_data['added_by'] = $this->data['session_auid'];
@@ -520,7 +520,7 @@ class Location_module extends Main
 				$update_data['updated_by'] = $this->data['session_auid'];
 
 				// Perform the update operation.
-				$response = $this->Common_model->update_operation(array('table' => "location", 'data' => $update_data, 'condition' => "location_id in ($ids)"));
+				$response = $this->Common_model->update_operation(array('table' => "location", 'data' => $update_data, 'condition' => "id in ($ids)"));
 				// If update is successful, set success alert message.
 				if ($response) {
 					$this->session->set_flashdata('alert_message', '<div class="alert alert-success alert-dismissible">
@@ -535,7 +535,7 @@ class Location_module extends Main
 			REDIRECT(MAINSITE_Admin . $user_access->class_name . '/' . $user_access->function_name);
 		} else {
 			// If user doesn't have permission, set access-denied message and redirect.
-			$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->module_name);
+			$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->name);
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
 	}

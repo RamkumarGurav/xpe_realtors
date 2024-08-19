@@ -7,9 +7,9 @@ $ark_root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT
 
 
 ////project details
-define('_project_name_', "Pearealtors");//this is used in 
-define('_project_name_for_web_title_', "Pearealtors"); # to display
-define('_project_complete_name_', "Pearealtors"); # to display
+define('_project_name_', "Pe Realtors");//this is used in 
+define('_project_name_for_web_title_', "Pe Realtors"); # to display
+define('_project_complete_name_', "Pe Realtors"); # to display
 define('_brand_name_', "PRS");//need in left_nav
 define('_summernote_', "");//need in left_nav
 // define('_project_address_', "MPP Complex, Shop No. 14 15 Siddipet Road Ramayampet Medak, Telangana, 502101 India.");
@@ -35,8 +35,8 @@ define('__sms_user_password__', "sms_user_password");
 // define('__adminemail__', "info@perealtors.in");
 // define('__adminsms__', "919392199595");  // for Register
 
-define('_project_web_', "www.perealtors.in");
-define('_mainsite_hostname_', "perealtors.in");
+define('_project_web_', "www.perealtors.com");
+define('_mainsite_hostname_', "perealtors.com");
 
 // define('_SMS_BRAND_', "perealtors.in");
 // define('__GSTIN__', "36AKRPG7758C2ZS");
@@ -51,11 +51,15 @@ define('_mainsite_hostname_', "perealtors.in");
 // define('_LINKEDIN_', "");
 
 
-////google captcha details
-define('_local_google_recaptcha_site_key_', "6LezxwUqAAAAAC7iAfqFV-2G8Q6upDtpVxHnTKQx");
-define('_local_google_recaptcha_secret_key_', "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe");
-define('_google_recaptcha_site_key_', "6LcnlAUqAAAAAOPvpkVUYHO57WZkKgL_DNMCZWtW");
-define('_google_recaptcha_secret_key_', "6LcnlAUqAAAAAPQS7pndA5PI8LAuvc0vpwY7xqbQ");
+////local recaptcha
+// define('_google_recaptcha_site_key_', "6LezxwUqAAAAAC7iAfqFV-2G8Q6upDtpVxHnTKQx");
+// define('_google_recaptcha_secret_key_', "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe");
+// define('_mainsite_host_', "localhost");
+
+////live recaptcha
+define('_google_recaptcha_site_key_', "6LfjNSoqAAAAAB5AaPPdEjh5OLvCQs1xXzxlL_iX");
+define('_google_recaptcha_secret_key_', "6LfjNSoqAAAAACuWpSEgVFps6T1tuksLU3_rPAbE");
+define('_mainsite_host_', "perealtors.com");
 
 
 //admin side related routes
@@ -89,12 +93,6 @@ define('_all_pagination_', "999999999");
 
 //country
 define('__const_country_id__', "1");
-
-
-
-
-
-
 
 
 

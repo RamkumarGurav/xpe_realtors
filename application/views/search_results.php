@@ -13,6 +13,7 @@
       <form name="search_results_form" id="search_results_form" action="<?= MAINSITE ?>search-results"
         accept-charset="utf-8" autocomplete="off" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="search_results_form_type" value="search_results_form">
+        <input type="hidden" name="search_keyword" id="search_keyword" value="<?= $search_keyword ?>">
         <div class="row align-items-center justify-content-center">
           <div class="col-lg col-6 mbb-5">
             <!-- <select style="width: 100%"> -->
@@ -21,12 +22,12 @@
               <option value="">Select State</option>
               <?php foreach ($state_data as $cd) {
                 $selected = "";
-                if ($cd->state_id == $state_id) {
+                if ($cd->id == $state_id) {
                   $selected = "selected";
                 }
                 ?>
-                <option value="<?php echo $cd->state_id ?>" <?php echo $selected ?>>
-                  <?php echo $cd->state_name ?>
+                <option value="<?php echo $cd->id ?>" <?php echo $selected ?>>
+                  <?php echo $cd->name ?>
 
                 </option>
               <?php } ?>
@@ -106,32 +107,39 @@
 
       <?php if (!empty($property_data)): ?>
         <table style="width: 100%;margin-top: 30px" class="table table-striped">
-          <tbody>
+          <tbody class="property_list">
             <tr>
               <th>Property ID</th>
               <th>Property Type</th>
               <th>Property Description</th>
             </tr>
+
             <?php foreach ($property_data as $property_item): ?>
-
               <tr>
-
-
                 <td><?= $property_item->property_custom_id ?></td>
                 <td><?= $property_item->property_type_name ?></td>
                 <td><?= truncate_text($property_item->description, 50) ?> <span class="moreinfo"><a
                       href="<?= MAINSITE ?>property-details/<?= $property_item->slug_url ?>">MORE INFO <i
                         class="fa fa-angle-double-right"></i></a></span></td>
               </tr>
-
             <?php endforeach; ?>
+
+
+
+            <div id="property_list_end" class="property_list_end"></div>
+
           </tbody>
         </table>
-        <center> <a href="index.html#form-sec mt-5 " class="primarybtn load-more" value="Submit Now"
-            style="    background: #36c837 !important;"> Load More</a></center>
+        <center>
+          <button id="load_more_property" onclick="load_more_property()" class="primarybtn load-more"
+            style="background: #36c837 !important;">Load
+            More</button>
+        </center>
+
       <?php else: ?>
 
-        <h3 class="text-center my-4">Sorry, No Records Found!</h3>
+
+        <h3 class="text-center my-4">Sorry, No Properties Found!</h3>
 
       <?php endif; ?>
 
@@ -246,4 +254,109 @@
     <?php } ?>
 
   });
+</script>
+
+
+
+<script>
+  function truncateText(text, maxLength = 100) {
+    // Check if the text length is greater than the maximum allowed length
+    if (text.length > maxLength) {
+      // Truncate the text and add ellipsis
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  }
+
+  var offset = 1;
+
+  var result = '';
+
+  function load_more_property() {
+
+
+    var state_id = $("#state_id").val();
+    var city_id = $("#city_id").val();
+    var location_id = $("#location_id").val();
+    var property_type_id = $("#property_type_id").val();
+    var property_sub_type_id = $("#property_sub_type_id").val();
+    var bhk_type_id = $("#bhk_type_id").val();
+    var door_facing_type_id = $("#door_facing_type_id").val();
+    var plot_facing_type_id = $("#plot_facing_type_id").val();
+    var gated_community_type_id = $("#gated_community_type_id").val();
+    var sale_type = $("#sale_type").val();
+    var search_keyword = $("#search_keyword").val();
+    // var offset = $("#offset").value;
+
+    var mainsite = "<?php echo MAINSITE; ?>";
+
+
+
+
+
+
+    console.log(offset);
+    $.ajax({
+      url: "<?php echo MAINSITE . 'load_more_property' ?>",
+      type: 'post',
+      dataType: "json",
+      data: {
+        "state_id": state_id,
+        "city_id": city_id,
+        "location_id": location_id,
+        "property_type_id": property_type_id,
+        "property_sub_type_id": property_sub_type_id,
+        "bhk_type_id": bhk_type_id,
+        "gated_community_type_id": gated_community_type_id,
+        "door_facing_type_id": door_facing_type_id,
+        "plot_facing_type_id": plot_facing_type_id,
+        "sale_type": sale_type,
+        "search_keyword": search_keyword,
+        "offset": offset
+
+
+      },
+      success: function (result) {
+
+        // if (result == "No") {
+        //   $('#load_more_property').hide();
+        // } else {
+        //   $('tbody').append(result);
+        // }
+
+
+        if (result.length > 0) {
+          let newProperties = '';
+          result.forEach(property => {
+            newProperties += `<tr>
+                            <td>${property.property_custom_id}</td>
+                            <td>${property.property_type_name}</td>
+                            <td>${truncateText(property.description, 50)} <span class="moreinfo"><a href="${mainsite}property-details/${property.slug_url}">MORE INFO <i class="fa fa-angle-double-right"></i></a></span></td>
+                        </tr>`;
+          });
+
+          $('tbody').append(newProperties);
+
+          offset += 1; // Update offset for the next batch
+
+        } else {
+          $('#load_more_property').hide();
+        }
+
+      },
+      error: function (request, error) {
+        console.log(error);
+        alert("Unknown Error. Please Try Again");
+      }
+    });
+
+
+
+
+  }
+
+
+
+
+
 </script>

@@ -23,25 +23,25 @@ class Location_model extends CI_Model
 		if (!empty($params['search_for'])) {
 			$this->db->select("count(ft.id) as counts");
 		} else {
-			$this->db->select("ft.*,s.state_id,s.state_name,ci.city_id,ci.city_name ");
+			$this->db->select("ft.*,s.id as state_id,s.name as state_name,ci.id as city_id,ci.name as city_name ");
 			$this->db->select("(select au.name from admin_user as  au where au.id = ft.added_by) as added_by_name");
 			$this->db->select("(select au.name from admin_user as  au where au.id = ft.updated_by) as updated_by_name");
 		}
 
 		$this->db->from("location as ft");
-		$this->db->join("state as s", "s.state_id = ft.state_id");
-		$this->db->join("city as ci", "ci.city_id = ft.city_id");
+		$this->db->join("state as s", "s.id = ft.state_id");
+		$this->db->join("city as ci", "ci.id = ft.city_id");
 
 
 		// Conditional logic for ordering results
 		if (!empty($params['order_by'])) {
 			$this->db->order_by($params['order_by']);
 		} else {
-			$this->db->order_by("ft.location_id desc"); // Default order by admin_user_id descending
+			$this->db->order_by("ft.id desc"); // Default order by admin_user_id descending
 		}
 
-		if (!empty($params['location_id'])) {
-			$this->db->where("ft.location_id", $params['location_id']);
+		if (!empty($params['id'])) {
+			$this->db->where("ft.id", $params['id']);
 		}
 
 		if (!empty($params['start_date'])) {

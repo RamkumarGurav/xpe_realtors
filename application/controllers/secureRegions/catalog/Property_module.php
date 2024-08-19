@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-require_once (APPPATH . "controllers/secureRegions/Main.php");
+require_once(APPPATH . "controllers/secureRegions/Main.php");
 class Property_module extends Main
 {
 
@@ -314,7 +314,7 @@ class Property_module extends Main
 		$search['offset'] = $offset;
 
 		// $this->data['country_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "country_id > 0", "order_by" => "country_name ASC"));
-		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "state_id > 0", "order_by" => "state_name ASC"));
+		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['property_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_type', 'where' => "id > 0", "order_by" => "name ASC"));
 
 		$this->data['property_data'] = $this->Property_model->get_property_data($search);
@@ -615,10 +615,10 @@ class Property_module extends Main
 		$this->data['page_parent_module_id'] = $this->data['user_access']->parent_module_id;
 
 
-		$this->data['country_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "country_id > 0", "order_by" => "country_name ASC"));
-		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "state_id > 0", "order_by" => "state_name ASC"));
-		$this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "city_id > 0", "order_by" => "city_name ASC"));
-		$this->data['location_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "location_id > 0", "order_by" => "location_name ASC"));
+		$this->data['country_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['location_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['property_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_type', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['property_sub_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_sub_type', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['property_age_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_age', 'where' => "id > 0", "order_by" => "name ASC"));

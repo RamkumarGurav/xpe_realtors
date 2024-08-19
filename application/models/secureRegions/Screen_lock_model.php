@@ -65,7 +65,7 @@ class Screen_lock_model extends CI_Model
 					array(
 						'table' => "admin_user", // Specify the table to update
 						'data' => $update_login, // Specify the data to update
-						'condition' => "(admin_user_id = $result->id)" // Specify the condition for the update
+						'condition' => "(id = $result->id)" // Specify the condition for the update
 					)
 				);
 			}

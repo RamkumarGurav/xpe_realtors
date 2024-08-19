@@ -88,8 +88,7 @@ class City_module extends Main
 		$end_date = '';
 		$start_date = '';
 		$record_status = "";
-		$is_display = "";
-		$country_id = "";
+		$country_id = 1;
 		$state_id = "";
 
 		if (!empty($_REQUEST['field_name']))
@@ -111,9 +110,6 @@ class City_module extends Main
 		if (!empty($_POST['record_status']))
 			$record_status = $_POST['record_status'];
 
-		if (!empty($_POST['is_display']))
-			$is_display = $_POST['is_display'];
-
 		if (!empty($_POST['country_id']))
 			$country_id = $_POST['country_id'];
 
@@ -126,7 +122,6 @@ class City_module extends Main
 		$this->data['end_date'] = $end_date;
 		$this->data['start_date'] = $start_date;
 		$this->data['record_status'] = $record_status;
-		$this->data['is_display'] = $is_display;
 		$this->data['country_id'] = $country_id;
 		$this->data['state_id'] = $state_id;
 
@@ -135,7 +130,6 @@ class City_module extends Main
 		$search['field_value'] = $field_value;
 		$search['field_name'] = $field_name;
 		$search['record_status'] = $record_status;
-		$search['is_display'] = $is_display;
 		$search['country_id'] = $country_id;
 		$search['state_id'] = $state_id;
 		$search['search_for'] = "count";
@@ -177,6 +171,7 @@ class City_module extends Main
 		$search['offset'] = $offset;
 
 		$this->data['country_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "country_id = '$country_id'", "order_by" => "name ASC"));
 		$this->data['city_data'] = $this->City_model->get_city_data($search);
 
 		parent::get_header();
@@ -207,7 +202,6 @@ class City_module extends Main
 		$end_date = '';
 		$start_date = '';
 		$record_status = "";
-		$is_display = "";
 		$country_id = "";
 		$state_id = "";
 
@@ -229,8 +223,6 @@ class City_module extends Main
 
 		if (!empty($_POST['record_status']))
 			$record_status = $_POST['record_status'];
-		if (!empty($_POST['is_display']))
-			$is_display = $_POST['is_display'];
 
 		if (!empty($_POST['country_id']))
 			$country_id = $_POST['country_id'];
@@ -244,7 +236,6 @@ class City_module extends Main
 		$this->data['end_date'] = $end_date;
 		$this->data['start_date'] = $start_date;
 		$this->data['record_status'] = $record_status;
-		$this->data['is_display'] = $is_display;
 		$this->data['country_id'] = $country_id;
 		$this->data['state_id'] = $state_id;
 
@@ -253,7 +244,6 @@ class City_module extends Main
 		$search['field_value'] = $field_value;
 		$search['field_name'] = $field_name;
 		$search['record_status'] = $record_status;
-		$search['is_display'] = $is_display;
 		$search['country_id'] = $country_id;
 		$search['state_id'] = $state_id;
 
@@ -319,6 +309,7 @@ class City_module extends Main
 	//method that loads the view of add city and update city page
 	function edit($id = "")
 	{
+		$country_id = 1;
 		$this->data['page_type'] = "list";
 		$user_access = $this->data['user_access'] = $this->data['User_auth_obj']->check_user_access(array("module_id" => $this->data['page_module_id']));
 
@@ -342,6 +333,9 @@ class City_module extends Main
 
 
 		$this->data['country_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "country_id = '$country_id'", "order_by" => "name ASC"));
+
+
 
 		// Assigning additional data for the view
 		$this->data['page_is_master'] = $this->data['user_access']->is_master;//this is for making left menu active
@@ -360,6 +354,8 @@ class City_module extends Main
 			$this->data['city_data'] = $this->data['city_data'][0];
 		}
 
+
+
 		parent::get_header();
 		parent::get_left_nav();
 		$this->load->view('secureRegions/master/City_module/edit', $this->data);
@@ -375,7 +371,7 @@ class City_module extends Main
 
 
 		// Validate essential form fields; if empty, set an error message and redirect
-		if (empty($_POST['name']) && empty($_POST['country_id']) && empty($_POST['state_id'])) {
+		if (empty($_POST['name']) && empty($_POST['state_id'])) {
 			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close"
 							data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban"></i> Something Went Wrong. Please Try Again.</div>';
 			$this->session->set_flashdata('alert_message', $alert_message);
@@ -409,23 +405,16 @@ class City_module extends Main
 		}
 
 		// Assign form data to variables and trim whitespace
-
-
-
-
-
-
-
-		// Prepare data for insertion or update
-		$enter_data['name'] = $name = trim($_POST['name']);
-		$enter_data['city_code'] = $city_code = trim($_POST['city_code']);
-		$enter_data['state_id'] = $state_id = $_POST['state_id'];
-		$enter_data['country_id'] = $country_id = $_POST['country_id'];
-		$enter_data['status'] = $status = $_POST['status'];
-		$enter_data['is_display'] = $is_display = $_POST['is_display'];
+		$name = trim($_POST['name']);
+		$city_code = trim($_POST['city_code']);
+		// $country_id = $_POST['country_id'];
+		$country_id = 1;
+		$state_id = $_POST['state_id'];
+		$status = $_POST['status'];
+		$is_display = $_POST['is_display'];
 
 		// Check if a city with the same name already exists in the same country and state but with a different id
-		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "name = \"$name\"  and country_id = $country_id and state_id = $state_id and id != $id"));
+		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "name = \"$name\" and id != $id and country_id = $country_id and state_id = $state_id"));
 
 		// If the city exists, set an error message and redirect to the edit page
 		if (!empty($is_exist)) {
@@ -435,22 +424,27 @@ class City_module extends Main
 			exit;
 		}
 
-
+		// Prepare data for insertion or update
+		$enter_data['name'] = getCleanText($name);
+		$enter_data['city_code'] = getCleanText($city_code);
+		$enter_data['state_id'] = $state_id;
+		$enter_data['country_id'] = $country_id;
+		$enter_data['status'] = $status;
+		$enter_data['is_display'] = $is_display;
 
 		// Default alert message for errors
 		$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button"
 		 class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-ban">
 		 </i> Something Went Wrong Please Try Again. </div>';
 
-		$insert_status = 0;
 		// Update operation if id is not empty
 		if (!empty($id)) {
 			$enter_data['updated_on'] = date("Y-m-d H:i:s");
 			$enter_data['updated_by'] = $this->data['session_auid'];
-			$insert_status = $this->Common_model->update_operation(array('table' => 'city', 'data' => $enter_data, 'condition' => "id = $id"));
+			$insertStatus = $this->Common_model->update_operation(array('table' => 'city', 'data' => $enter_data, 'condition' => "id = $id"));
 
 			// Set success message if update is successful
-			if (!empty($insert_status)) {
+			if (!empty($insertStatus)) {
 				$alert_message = '<div class="alert alert-success alert-dismissible"><button type="button" 
 				class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-check">
 				</i> Record Updated Successfully </div>';
@@ -460,10 +454,10 @@ class City_module extends Main
 		} else {
 			$enter_data['added_on'] = date("Y-m-d H:i:s");
 			$enter_data['added_by'] = $this->data['session_auid'];
-			$insert_status = $this->Common_model->add_operation(array('table' => 'city', 'data' => $enter_data));
+			$insertStatus = $this->Common_model->add_operation(array('table' => 'city', 'data' => $enter_data));
 
 			// Set success message if insert is successful
-			if (!empty($insert_status)) {
+			if (!empty($insertStatus)) {
 				$alert_message = '<div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><i class="icon fas fa-check"></i> New Record Added Successfully </div>';
 			}
 		}

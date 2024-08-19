@@ -76,7 +76,7 @@ header("Content-Type: application/vnd.ms-excel");
                         ?>
                         <tr>
                             <td width="*"><?php echo $count; ?></td>
-                            <td width="*"><?php echo $item->name; ?></td>
+                            <td width="*"><?php echo $item->state_name; ?></td>
                             <td width="*"><?php echo $item->country_name; ?></td>
                             <td width="*"><?php echo $item->state_code; ?></td>
                             <td width="*">

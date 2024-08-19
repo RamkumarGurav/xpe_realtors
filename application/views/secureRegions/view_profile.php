@@ -71,17 +71,17 @@ if (!empty($admin_user_data)) {
 								echo "active";
 							} ?>" href="#tab_user_name" data-toggle="tab">User Name</a></li>
 							<? /* ?><li class="nav-item dropdown">
-																																			<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-																																				Dropdown <span class="caret"></span>
-																																			</a>
-																																			<div class="dropdown-menu">
-																																				<a class="dropdown-item" tabindex="-1" href="#">Action</a>
-																																				<a class="dropdown-item" tabindex="-1" href="#">Another action</a>
-																																				<a class="dropdown-item" tabindex="-1" href="#">Something else here</a>
-																																				<div class="dropdown-divider"></div>
-																																				<a class="dropdown-item" tabindex="-1" href="#">Separated link</a>
-																																			</div>
-																																		</li><? */ ?>
+																																										 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+																																											 Dropdown <span class="caret"></span>
+																																										 </a>
+																																										 <div class="dropdown-menu">
+																																											 <a class="dropdown-item" tabindex="-1" href="#">Action</a>
+																																											 <a class="dropdown-item" tabindex="-1" href="#">Another action</a>
+																																											 <a class="dropdown-item" tabindex="-1" href="#">Something else here</a>
+																																											 <div class="dropdown-divider"></div>
+																																											 <a class="dropdown-item" tabindex="-1" href="#">Separated link</a>
+																																										 </div>
+																																									 </li><? */ ?>
 						</ul>
 					</div><!-- /.card-header -->
 					<div class="card-body">
@@ -89,12 +89,13 @@ if (!empty($admin_user_data)) {
 							<div class="tab-pane <? if ($tab_type == 'profile') {
 								echo "active";
 							} ?>" id="tab_profile">
+
 								<table id="" class="table table-bordered table-hover myviewtable responsiveTableNewDesign">
 									<tbody>
 										<tr>
 											<td>
 												<strong class="full">Data Base Id</strong>
-												<?php echo $admin_user_data->admin_user_id ?>
+												<?php echo $admin_user_data->id ?>
 											</td>
 											<td>
 												<strong class="full">Role</strong>
@@ -129,7 +130,7 @@ if (!empty($admin_user_data)) {
 												<?php echo $admin_user_data->designation_name ?>
 											</td>
 											<td>
-												<strong class="full">Joining Date1</strong>
+												<strong class="full">Joining Date</strong>
 												<?php if (!empty($admin_user_data->joining_date)) {
 													echo date("d-m-Y", strtotime($admin_user_data->joining_date));
 												} else {
@@ -151,7 +152,7 @@ if (!empty($admin_user_data)) {
 										<tr>
 											<td>
 												<strong class="full">Employee Name</strong>
-												<?php echo $admin_user_data->admin_user_name ?>
+												<?php echo $admin_user_data->name ?>
 											</td>
 											<td>
 												<strong class="full">Password</strong>
@@ -267,7 +268,6 @@ if (!empty($admin_user_data)) {
 									</tbody>
 
 								</table>
-
 							</div>
 							<!-- /.tab-pane -->
 							<div class="tab-pane <? if ($tab_type == 'password') {
