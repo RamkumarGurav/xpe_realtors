@@ -233,13 +233,20 @@ class Login extends CI_Controller
 			$mailMessage = str_replace("#uri#", MAINSITE_Admin, $mailMessage);
 
 
-			$subject = "User Forgot Password on Perealtors";
-			//	$mailStatus = $this->Common_model->send_mail_api(array("template"=>$mailMessage , "subject"=>$subject , "to"=>strtolower($b_email) , "name"=>$name ));
-			//	$mailStatus = $this->Common_model->send_mail_api(array("template"=>$mailMessage , "subject"=>$subject , "to"=>__adminemail__ , "name"=>"BSNL" ));
-			$mailStatus = $this->Common_model->send_mail_api(array("template" => $mailMessage, "subject" => $subject, "to" => "$email", "name" => "Perealtors"));
-			//$mailStatus = $this->Common_model->send_mail_api(array("template"=>$mailMessage , "subject"=>$subject , "to"=>"anil@marswebsolutions.com" , "name"=>"Login Reset" ));
-			//$mailStatus = $this->Common_model->send_mail_api(array("template"=>$mailMessage , "subject"=>$subject , "to"=>"viswa69@gmail.com" , "name"=>"Booking" ));
-			//	$mailStatus = $this->Common_model->send_mail_api(array("template"=>$mailMessage , "subject"=>$subject , "to"=>"anilkumarbora14310@gmail.com" , "name"=>"Login Reset" ));
+
+
+			$to_name = $from_name = "Pe Realtors";
+			$subject = "User Forgot Password on Pe Realtors";
+
+
+			$mailStatus = $this->Common_model->send_mail(array(
+				"template" => $mailMessage,
+				"subject" => $subject,
+				"to" => $email,
+				"name" => $to_name,
+			));
+			// $mailStatus = $this->Common_model->send_mail_api(array("template" => $mailMessage, "subject" => $subject, "to" => "$email", "name" => "Perealtors"));
+			// $mailStatus = $this->Common_model->send_mail(array("template" => $mailMessage, "subject" => $subject, "to" => "$email", "name" => "Perealtors"));
 			$message = 'We have sent the password reset link to your email id ' . $email;
 
 
@@ -264,6 +271,7 @@ class Login extends CI_Controller
 			$this->data['company_profile_data'] = $this->data['company_profile_data'][0];
 			$this->data['company_logo_file_name'] = $this->data['company_profile_data']->logo;
 		}
+
 
 
 

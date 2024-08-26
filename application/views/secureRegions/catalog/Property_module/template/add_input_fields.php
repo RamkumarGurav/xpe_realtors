@@ -33,22 +33,13 @@ if (!empty($property_data)) {
 }
 
 // $property_type_id = 2;
+// 0 means hidden,1 means optional,2 means required
 
 $feilds_details_data = [
+  //
   (object) [
     "selected_property_type_id" => 0,
-    "property_age_id_prop" => 2,
-    "bhk_type_id_prop" => 0,
-    "plot_facing_type_id_prop" => 0,
-    "door_facing_type_id_prop" => 0,
-    "plot_dimension_sqft_prop" => 0,
-    "built_up_area_prop" => 0,
-    "in_acres_prop" => 0,
-    "in_guntas_prop" => 0,
-    "gated_community_type_id_prop" => 0,
-  ],
-  (object) [
-    "selected_property_type_id" => 9,
+    "property_sub_type_id_prop" => 0,
     "property_age_id_prop" => 0,
     "bhk_type_id_prop" => 0,
     "plot_facing_type_id_prop" => 0,
@@ -59,52 +50,27 @@ $feilds_details_data = [
     "in_guntas_prop" => 0,
     "gated_community_type_id_prop" => 0,
   ],
-  (object) [
-    "selected_property_type_id" => 2,
-    "property_age_id_prop" => 2,
-    "bhk_type_id_prop" => 0,
-    "plot_facing_type_id_prop" => 0,
-    "door_facing_type_id_prop" => 2,
-    "plot_dimension_sqft_prop" => 2,
-    "built_up_area_prop" => 2,
-    "in_acres_prop" => 0,
-    "in_guntas_prop" => 0,
-    "gated_community_type_id_prop" => 0,
 
-  ],
   (object) [
-    "selected_property_type_id" => 1,
+    "selected_property_type_id" => 1,//Rent_Residential
+    "property_sub_type_id_prop" => 2,
     "property_age_id_prop" => 2,
     "bhk_type_id_prop" => 2,
-    "plot_facing_type_id_prop" => 2,
+    "plot_facing_type_id_prop" => 1,
     "door_facing_type_id_prop" => 2,
-    "plot_dimension_sqft_prop" => 2,
+    "plot_dimension_sqft_prop" => 0,
     "built_up_area_prop" => 2,
     "in_acres_prop" => 0,
     "in_guntas_prop" => 0,
     "gated_community_type_id_prop" => 1,
 
   ],
-
   (object) [
-    "selected_property_type_id" => 8,
-    "property_age_id_prop" => 0,
-    "bhk_type_id_prop" => 0,
-    "plot_facing_type_id_prop" => 0,
-    "door_facing_type_id_prop" => 0,
-    "plot_dimension_sqft_prop" => 0,
-    "built_up_area_prop" => 0,
-    "in_acres_prop" => 2,
-    "in_guntas_prop" => 2,
-    "gated_community_type_id_prop" => 0,
-
-  ],
-
-  (object) [
-    "selected_property_type_id" => 7,
+    "selected_property_type_id" => 2,//Rent_Commercial
+    "property_sub_type_id_prop" => 2,
     "property_age_id_prop" => 2,
     "bhk_type_id_prop" => 0,
-    "plot_facing_type_id_prop" => 2,
+    "plot_facing_type_id_prop" => 0,
     "door_facing_type_id_prop" => 2,
     "plot_dimension_sqft_prop" => 2,
     "built_up_area_prop" => 2,
@@ -113,24 +79,9 @@ $feilds_details_data = [
     "gated_community_type_id_prop" => 0,
 
   ],
-
-
   (object) [
-    "selected_property_type_id" => 6,
-    "property_age_id_prop" => 2,
-    "bhk_type_id_prop" => 0,
-    "plot_facing_type_id_prop" => 2,
-    "door_facing_type_id_prop" => 0,
-    "plot_dimension_sqft_prop" => 2,
-    "built_up_area_prop" => 2,
-    "in_acres_prop" => 0,
-    "in_guntas_prop" => 0,
-    "gated_community_type_id_prop" => 0,
-
-  ],
-
-  (object) [
-    "selected_property_type_id" => 3,
+    "selected_property_type_id" => 3,//Sale_Residential Flat
+    "property_sub_type_id_prop" => 0,
     "property_age_id_prop" => 2,
     "bhk_type_id_prop" => 2,
     "plot_facing_type_id_prop" => 2,
@@ -144,7 +95,8 @@ $feilds_details_data = [
   ],
 
   (object) [
-    "selected_property_type_id" => 4,
+    "selected_property_type_id" => 4,//Sale_Residential House
+    "property_sub_type_id_prop" => 0,
     "property_age_id_prop" => 2,
     "bhk_type_id_prop" => 2,
     "plot_facing_type_id_prop" => 2,
@@ -158,7 +110,8 @@ $feilds_details_data = [
   ],
 
   (object) [
-    "selected_property_type_id" => 5,
+    "selected_property_type_id" => 5,//Sale_Residential Site
+    "property_sub_type_id_prop" => 0,
     "property_age_id_prop" => 2,
     "bhk_type_id_prop" => 0,
     "plot_facing_type_id_prop" => 2,
@@ -170,6 +123,67 @@ $feilds_details_data = [
     "gated_community_type_id_prop" => 0,
 
   ],
+  (object) [
+    "selected_property_type_id" => 6,//Sale_Commercial Site
+    "property_sub_type_id_prop" => 0,
+    "property_age_id_prop" => 2,
+    "bhk_type_id_prop" => 0,
+    "plot_facing_type_id_prop" => 2,
+    "door_facing_type_id_prop" => 0,
+    "plot_dimension_sqft_prop" => 2,
+    "built_up_area_prop" => 0,
+    "in_acres_prop" => 0,
+    "in_guntas_prop" => 0,
+    "gated_community_type_id_prop" => 0,
+
+  ],
+
+
+  (object) [
+    "selected_property_type_id" => 7,//Sale_Commercial Building
+    "property_sub_type_id_prop" => 2,
+    "property_age_id_prop" => 2,
+    "bhk_type_id_prop" => 0,
+    "plot_facing_type_id_prop" => 2,
+    "door_facing_type_id_prop" => 2,
+    "plot_dimension_sqft_prop" => 2,
+    "built_up_area_prop" => 2,
+    "in_acres_prop" => 0,
+    "in_guntas_prop" => 0,
+    "gated_community_type_id_prop" => 0,
+
+  ],
+  (object) [
+    "selected_property_type_id" => 8,//Sale_Agriculture
+    "property_sub_type_id_prop" => 0,
+    "property_age_id_prop" => 0,
+    "bhk_type_id_prop" => 0,
+    "plot_facing_type_id_prop" => 0,
+    "door_facing_type_id_prop" => 0,
+    "plot_dimension_sqft_prop" => 0,
+    "built_up_area_prop" => 0,
+    "in_acres_prop" => 2,
+    "in_guntas_prop" => 2,
+    "gated_community_type_id_prop" => 0,
+
+  ],
+
+  (object) [
+    "selected_property_type_id" => 9,//New Projects
+    "property_sub_type_id_prop" => 0,
+    "property_age_id_prop" => 0,
+    "bhk_type_id_prop" => 0,
+    "plot_facing_type_id_prop" => 0,
+    "door_facing_type_id_prop" => 0,
+    "plot_dimension_sqft_prop" => 0,
+    "built_up_area_prop" => 0,
+    "in_acres_prop" => 0,
+    "in_guntas_prop" => 0,
+    "gated_community_type_id_prop" => 0,
+  ],
+
+
+
 
 
 
@@ -194,7 +208,34 @@ $feilds_details_data = [
 
 
 
-    <!-- <?php if ($row->property_age_id_prop == 2): ?>
+    <?php if ($row->property_sub_type_id_prop == 2): ?>
+      <div class="col-md-4 col-sm-6 mb-3">
+        <label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Property Sub Type <span
+            style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
+        <div class="col-sm-12">
+          <select type="text" class="form-control form-control-sm custom-select" required id="property_sub_type_id"
+            name="property_sub_type_id">
+            <option value="">Select Property Sub Type</option>
+          </select>
+        </div>
+      </div>
+    <?php elseif ($row->property_sub_type_id_prop == 1): ?>
+      <div class="col-md-4 col-sm-6 mb-3">
+        <label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Property Sub Type <span
+            style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
+        <div class="col-sm-12">
+          <select type="text" class="form-control form-control-sm custom-select" id="property_sub_type_id"
+            name="property_sub_type_id">
+            <option value="">Select Property Sub Type</option>
+          </select>
+        </div>
+      </div>
+    <?php else: ?>
+
+      <input type="hidden" name="property_sub_type_id" id="property_sub_type_id" value="0" />
+    <?php endif; ?>
+
+    <?php if ($row->property_age_id_prop == 2): ?>
       <div class="col-md-4 col-sm-6 mb-3">
         <label for="inputEmail3" class="col-sm-12 label_content px-2 py-0"> Property Age <span
             style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
@@ -243,7 +284,7 @@ $feilds_details_data = [
     <?php else: ?>
 
       <input type="hidden" name="property_age_id" id="property_age_id" value="0" />
-    <?php endif; ?> -->
+    <?php endif; ?>
 
 
     <?php if ($row->bhk_type_id_prop == 2): ?>

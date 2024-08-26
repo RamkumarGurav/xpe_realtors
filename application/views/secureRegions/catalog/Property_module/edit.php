@@ -52,7 +52,7 @@ $sale_type = "";
 $sale_duration_type = "";
 $sale_amount = "";
 $is_negotiable = 1;
-$is_display = "";
+$is_display = 1;
 $youtube_link = "";
 $description = "";
 $other_details = "";
@@ -138,7 +138,7 @@ $sale_duration_type_data = [
 
 			url: '<? echo MAINSITE_Admin ?>catalog/Property-module/get_property_gallery_image_list',
 			//dataType : "json",
-			data: { "property_gallery_image_id": '<? echo $property_gallery_image_id; ?>', "property_id": '<? echo $property_id; ?>', "withPosition": 1, 'sortByPosition': 1, "<?= $csrf['name'] ?>": "<?= $csrf['hash'] ?>" },
+			data: { "property_gallery_image_id": '<? echo $property_gallery_image_id; ?>', "property_id": '<? echo $id; ?>', "withPosition": 1, 'sortByPosition': 1, "<?= $csrf['name'] ?>": "<?= $csrf['hash'] ?>" },
 			success: function (result) {
 				//   alert(result);
 				$('#property_gallery_image_list').html(result);
@@ -243,7 +243,7 @@ $sale_duration_type_data = [
 
 
 							<div class="form-group row">
-								<div class="col-md-4 col-sm-6">
+								<div class="col-md-8 col-sm-6">
 									<label for="name" class="col-sm-12 label_content px-2 py-0"> Property Name <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-12">
@@ -276,7 +276,7 @@ $sale_duration_type_data = [
 									</div>
 								</div>
 
-								<div class="col-md-4 col-sm-6">
+								<!-- <div class="col-md-4 col-sm-6">
 									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Property Sub Type <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-12">
@@ -285,7 +285,7 @@ $sale_duration_type_data = [
 											<option value="">Select Property Sub Type</option>
 										</select>
 									</div>
-								</div>
+								</div> -->
 
 							</div>
 
@@ -293,60 +293,68 @@ $sale_duration_type_data = [
 							<div class="form-group row">
 
 
-								<div class="col-md-4 col-sm-6">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">State <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-10">
-										<select type="text" class="form-control form-control-sm" required id="state_id"
-											onchange="get_city(this.value ,0)" name="state_id">
-											<option value="">Select State</option>
-											<?php foreach ($state_data as $item) {
-												$selected = "";
-												if ($item->id == $state_id) {
-													$selected = "selected";
-												}
-												?>
-												<option value="<?php echo $item->id ?>" <?php echo $selected ?>>
-													<?php echo $item->name ?>
-													<?php if ($item->status != 1) {
-														echo " [Block]";
-													} ?>
-												</option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
+<div class="col-md-4 col-sm-6">
+	<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">State <span
+			style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
+	<div class="col-sm-10">
+		<select type="text" class="form-control form-control-sm" required id="state_id"
+			onchange="get_city(this.value ,0)" name="state_id">
+			<option value="">Select State</option>
+			<?php foreach ($state_data as $item) {
+				$selected = "";
+				if ($item->id == $state_id) {
+					$selected = "selected";
+				}
+				?>
+				<option value="<?php echo $item->id ?>" <?php echo $selected ?>>
+					<?php echo $item->name ?>
+					<?php if ($item->status != 1) {
+						echo " [Block]";
+					} ?>
+				</option>
+			<?php } ?>
+		</select>
+	</div>
+</div>
 
-								<div class="col-md-4 col-sm-6">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">City <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-12">
-										<select type="text" class="form-control form-control-sm custom-select" required id="city_id"
-											name="city_id" onchange="get_location(this.value,0)">
-											<option value="">Select City</option>
-										</select>
-									</div>
-								</div>
-
-
-								<div class="col-md-4 col-sm-6">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Location <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-12">
-										<select type="text" class="form-control form-control-sm custom-select" required id="location_id"
-											name="location_id">
-											<option value="">Select Location</option>
-										</select>
-									</div>
-								</div>
+<div class="col-md-4 col-sm-6">
+	<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">City <span
+			style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
+	<div class="col-sm-12">
+		<select type="text" class="form-control form-control-sm custom-select" required id="city_id"
+			name="city_id" onchange="get_location(this.value,0)">
+			<option value="">Select City</option>
+		</select>
+	</div>
+</div>
 
 
-							</div>
+<div class="col-md-4 col-sm-6">
+	<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Location <span
+			style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
+	<div class="col-sm-12">
+		<select type="text" class="form-control form-control-sm custom-select" required id="location_id"
+			name="location_id">
+			<option value="">Select Location</option>
+		</select>
+	</div>
+</div>
+
+
+</div>
+
+
+
+							<div class="form-group row" id="add_input_fields">
+
+							
+</div>
+
 
 
 							<div class="form-group row">
 
-								<div class="col-md-4 col-sm-6">
+								<!-- <div class="col-md-4 col-sm-6">
 									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Property Age <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-10">
@@ -368,7 +376,7 @@ $sale_duration_type_data = [
 											<?php } ?>
 										</select>
 									</div>
-								</div>
+								</div> -->
 
 								<div class="col-md-4 col-sm-6">
 									<label for="name" class="col-sm-12 label_content px-2 py-0">Reference No. <span
@@ -381,7 +389,7 @@ $sale_duration_type_data = [
 
 
 
-								<div class="col-md-4 col-sm-6">
+								<div class="col-md-8 col-sm-6">
 									<label for="name" class="col-sm-12 label_content px-2 py-0">Youtube Link <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;"></span></label>
 									<div class="col-sm-12">
@@ -392,151 +400,19 @@ $sale_duration_type_data = [
 							</div>
 
 
-							<div class="form-group row" id="add_input_fields">
-
-								<!-- <div class="col-md-4 col-sm-6 mb-3">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">BHK Type <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-10">
-										<select type="text" class="form-control form-control-sm" required id="bhk_type_id" name="bhk_type_id">
-											<option value="">Select BHK Type</option>
-											<?php foreach ($bhk_type_data as $item) {
-												$selected = "";
-												if ($item->id == $bhk_type_id) {
-													$selected = "selected";
-												}
-												?>
-												<option value="<?php echo $item->id ?>" <?php echo $selected ?>>
-													<?php echo $item->name ?>
-													<?php if ($item->status != 1) {
-														echo " [Block]";
-													} ?>
-												</option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6 mb-3">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Plot Facing Type <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-10">
-										<select type="text" class="form-control form-control-sm" required id="plot_facing_type_id"
-											name="plot_facing_type_id">
-											<option value="">Select Plot Facing Type</option>
-											<?php foreach ($facing_type_data as $item) {
-												$selected = "";
-												if ($item->id == $plot_facing_type_id) {
-													$selected = "selected";
-												}
-												?>
-												<option value="<?php echo $item->id ?>" <?php echo $selected ?>>
-													<?php echo $item->name ?>
-													<?php if ($item->status != 1) {
-														echo " [Block]";
-													} ?>
-												</option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6 mb-3">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Door Facing Type <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-10">
-										<select type="text" class="form-control form-control-sm" required id="door_facing_type_id"
-											name="door_facing_type_id">
-											<option value="">Select Door Facing Type</option>
-											<?php foreach ($facing_type_data as $item) {
-												$selected = "";
-												if ($item->id == $door_facing_type_id) {
-													$selected = "selected";
-												}
-												?>
-												<option value="<?php echo $item->id ?>" <?php echo $selected ?>>
-													<?php echo $item->name ?>
-													<?php if ($item->status != 1) {
-														echo " [Block]";
-													} ?>
-												</option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
-
-								<div class="col-md-4 col-sm-6 mb-3">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Gated Community Type <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-10">
-										<select type="text" class="form-control form-control-sm" required id="gated_community_type_id"
-											name="gated_community_type_id">
-											<option value="">Select Gated Community Type</option>
-											<?php foreach ($gated_community_type_data as $item) {
-												$selected = "";
-												if ($item->id == $gated_community_type_id) {
-													$selected = "selected";
-												}
-												?>
-												<option value="<?php echo $item->id ?>" <?php echo $selected ?>>
-													<?php echo $item->name ?>
-													<?php if ($item->status != 1) {
-														echo " [Block]";
-													} ?>
-												</option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
-
-								<div class="col-md-4 col-sm-6 mb-3">
-									<label for="name" class="col-sm-12 label_content px-2 py-0">Plot Dimension in Sqft <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-12">
-										<input type="text" class="form-control form-control-sm" required id="plot_dimension_sqft"
-											name="plot_dimension_sqft" value="<?= $plot_dimension_sqft ?>" placeholder="Plot Dimension in Sqft">
-									</div>
-								</div>
-
-								<div class="col-md-4 col-sm-6 ">
-									<label for="name" class="col-sm-12 label_content px-2 py-0">Built Up Area <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-12">
-										<input type="text" class="form-control form-control-sm" required id="built_up_area"
-											name="built_up_area" value="<?= $built_up_area ?>" placeholder="Built Up Area">
-									</div>
-								</div>
-
-								<div class="col-md-4 col-sm-6">
-									<label for="name" class="col-sm-12 label_content px-2 py-0">Area in Acres <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-12">
-										<input type="text" class="form-control form-control-sm" required id="in_acres" name="in_acres"
-											value="<?= $in_acres ?>" placeholder="Area in Acres">
-									</div>
-								</div>
-
-								<div class="col-md-4 col-sm-6">
-									<label for="name" class="col-sm-12 label_content px-2 py-0">Area in Guntas <span
-											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
-									<div class="col-sm-12">
-										<input type="text" class="form-control form-control-sm" required id="in_guntas" name="in_guntas"
-											value="<?= $in_guntas ?>" placeholder="Area in Guntas">
-									</div>
-								</div> -->
-
-
-							</div>
+						
 
 
 
 							<div class="form-group row">
 
 								<div class="col-md-4 col-sm-6">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Sale Type <span
+									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Deal Type <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-10">
 										<select type="text" class="form-control form-control-sm" required id="sale_type" name="sale_type"
 											onchange="update_sale_duration()">
-											<option value="">Select Sale Type</option>
+											<option value="">Select Deal Type</option>
 
 
 											<?php foreach ($sale_type_data as $item) {
@@ -555,12 +431,12 @@ $sale_duration_type_data = [
 								</div>
 
 								<div class="col-md-4 col-sm-6">
-									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Sale Duration Type<span
+									<label for="inputEmail3" class="col-sm-12 label_content px-2 py-0">Deal Duration Type<span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-10">
 										<select type="text" class="form-control form-control-sm" required id="sale_duration_type"
 											name="sale_duration_type">
-											<option value="">Select Sale Duration Type</option>
+											<option value="">Select Deal Duration Type</option>
 											<?php foreach ($sale_duration_type_data as $item) {
 												$selected = "";
 												if ($item->value == $sale_duration_type) {
@@ -581,7 +457,7 @@ $sale_duration_type_data = [
 								</div>
 
 								<div class="col-md-4 col-sm-6">
-									<label for="name" class="col-sm-12 label_content px-2 py-0">Sale Amount <span
+									<label for="name" class="col-sm-12 label_content px-2 py-0">Amount <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-12">
 										<input type="text" pattern="^\d+(\.\d{1,2})?$" title="A positive number with up to two decimal places"
@@ -678,7 +554,7 @@ $sale_duration_type_data = [
 							</div>
 
 							<div class="form-group row">
-								<div class="col-md-4 col-sm-6">
+								<div class="col-md-6 col-sm-6">
 									<label for="name" class="col-sm-12 label_content px-2 py-0">Slug URL <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-12">
@@ -690,7 +566,7 @@ $sale_duration_type_data = [
 								</div>
 
 
-								<div class="col-md-4 col-sm-6">
+								<div class="col-md-6 col-sm-6">
 									<label for="name" class="col-sm-12 label_content px-2 py-0">Meta Keyword <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-12">
@@ -700,7 +576,13 @@ $sale_duration_type_data = [
 								</div>
 
 
-								<div class="col-md-4 col-sm-6">
+							
+
+
+							</div>
+
+							<div class="form-group row">
+							<div class="col-md-8 col-sm-6">
 									<label for="name" class="col-sm-12 label_content px-2 py-0">Meta Description <span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
 									<div class="col-sm-12">
@@ -708,12 +590,6 @@ $sale_duration_type_data = [
 											name="meta_description" value="<?= $meta_description ?>" placeholder="Meta Description">
 									</div>
 								</div>
-
-
-							</div>
-
-							<div class="form-group row">
-
 								<div class="col-md-4 col-sm-6">
 									<label for="radioSuccess1" class="col-sm-12 label_content px-2 py-0">Is Negotiable?<span
 											style="color:#f00;font-size: 22px;margin-top: 3px;">*</span></label>
@@ -1027,7 +903,19 @@ $sale_duration_type_data = [
 
 
 	function get_property_sub_type(property_type_id, property_sub_type_id = 0) {
-		$("#property_sub_type_id").html('');
+		console.log("get_property_sub_type");
+		$("#add_input_fields").html('');
+		if (property_type_id > 0) {
+			Pace.restart();
+			$.ajax({
+				url: "<?php echo MAINSITE_Admin . 'catalog/Property_module/add_input_fields' ?>",
+				type: 'post',
+				dataType: "json",
+				data: { 'selected_property_type_id': property_type_id, "id": <?= $id ?>, "<?= $csrf['name'] ?>": "<?= $csrf['hash'] ?>" },
+				success: function (response) {
+					$("#add_input_fields").html(response.html_data);
+
+					$("#property_sub_type_id").html('');
 		if (property_type_id > 0) {
 			Pace.restart();
 			$.ajax({
@@ -1049,16 +937,7 @@ $sale_duration_type_data = [
 			});
 		}
 
-		$("#add_input_fields").html('');
-		if (property_type_id > 0) {
-			Pace.restart();
-			$.ajax({
-				url: "<?php echo MAINSITE_Admin . 'catalog/Property_module/add_input_fields' ?>",
-				type: 'post',
-				dataType: "json",
-				data: { 'selected_property_type_id': property_type_id, "id": <?= $id ?>, "<?= $csrf['name'] ?>": "<?= $csrf['hash'] ?>" },
-				success: function (response) {
-					$("#add_input_fields").html(response.html_data);
+	
 				},
 				error: function (request, error) {
 					toastrDefaultErrorFunc("Unknown Error. Please Try Again");
@@ -1068,6 +947,29 @@ $sale_duration_type_data = [
 
 
 
+		// $("#property_sub_type_id").html('');
+		// if (property_type_id > 0) {
+		// 	Pace.restart();
+		// 	$.ajax({
+		// 		url: "<?php echo MAINSITE_Admin . 'Ajax/get_dropdown' ?>",
+		// 		type: 'post',
+		// 		dataType: "json",
+		// 		data: {
+		// 			'table_name': 'property_sub_type', 'showable_column_name': 'name', 'select_title': 'Select Property Sub Type',
+		// 			'primary_column_name': "id", 'primary_column_value': property_sub_type_id,
+		// 			'foreign_column_name': "property_type_id", 'foreign_column_value': property_type_id,
+		// 			"<?php echo $csrf['name'] ?>": "<?php echo $csrf['hash'] ?>"
+		// 		},
+		// 		success: function (response) {
+		// 			$("#property_sub_type_id").html(response.dropdown_html);
+		// 		},
+		// 		error: function (request, error) {
+		// 			toastrDefaultErrorFunc("Unknown Error. Please Try Again");
+		// 		}
+		// 	});
+		// }
+
+	
 	}
 
 
@@ -1132,13 +1034,11 @@ $sale_duration_type_data = [
 
 
 	window.addEventListener('load', function () {
-		<?php if (!empty($property_type_id) && !empty($property_sub_type_id)) { ?>
+		<?php if (!empty($property_type_id) ) { ?>
 			get_property_sub_type(<?php echo $property_type_id ?>, <?php echo $property_sub_type_id ?>);
 		<?php } ?>
 
-		// <?php if (!empty($country_id) && !empty($state_id)) { ?>
-			// 	get_state(<?php echo $country_id ?>, <?php echo $state_id ?>);
-			// <?php } ?>
+	
 
 		<?php if (!empty($city_id) && !empty($state_id)) { ?>
 			get_city(<?php echo $state_id ?>, <?php echo $city_id ?>);
@@ -1339,35 +1239,9 @@ $sale_duration_type_data = [
 	}
 	/* <<<< ADDING MORE GALLERY FILES*/
 </script>
-<script>
-	// require(['bootstrap-multiselect'], function (purchase) {
-	// 	$('#mySelect').multiselect();
-	// });
-</script>
-
-<script>
-	$(document).ready(function () {
-		$("#google_map_address").each(function () {
-			var target = this;
-			var $collapse = $(this).parents('.form-group').next('.collapse');
-			var $map = $collapse.find('.another-map-class');
-			var placepicker = $(this).placepicker({
-
-				map: $map.get(0),
-				placeChanged: function (place) {
-					console.log(place);
-					if (place.url != undefined && place.url != '') {
-						$('#google_map_url').val(place.url);
-					}
-					console.log("place changed: ", place.formatted_address, this.getLocation());
-				}
-			}).data('placepicker');
-		});
-
-	});
 
 
-</script>
+
 
 <script>
 	// Check if the File API is supported by the browser

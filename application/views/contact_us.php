@@ -69,8 +69,8 @@
           </div>
           <div class="col-lg-12">
             <ul class="loc-btns mb-3">
-              <button class="primarybtn" style="    background: #006699;">Bengaluru</button>
-              <button class="primarybtn" style="background: #0099cc;">Mysuru</button>
+              <button class="primarybtn" style="    background: #da9f3a;">Bengaluru</button>
+              <button class="primarybtn" style="background: #6c757d;">Mysuru</button>
             </ul>
           </div>
         </div>
@@ -180,23 +180,40 @@
                 <div class="info">
                   <div class="d-flex">
                     <i class="fa fa-map-marker" aria-hidden="true" style="    margin-top: 5px;margin-right: 5px"></i>
-                    <p class="in-p"><b>Registered Office: </b>#329, 21st Main, JP Nagar 2nd Stage, Mysore Karnataka.
-                      570008</p>
+                    <p class="in-p mb-0"><b>Registered Office: </b>#329, 21st Main, JP Nagar 2nd Stage, Mysore Karnataka.
+                      570008 <a target="_blank" href="https://maps.app.goo.gl/apYZwhUrpKnJM4g68?g_st=com.google.maps.preview.copy">Locate Here</a></p>
+
                   </div>
+                    
+                </div>
+              </li>
+                <li>
+                <div class="info">
+                
                   <div class="d-flex">
                     <i class="fa fa-map-marker" aria-hidden="true" style="    margin-top: 5px;margin-right: 5px"></i>
-                    <p class="in-p"><b>Corporate Office: </b>No.2932/A New Corporation No.8 , Second Floor 14th Main
+                    <p class="in-p mb-0"><b>Corporate Office: </b>No.2932/A New Corporation No.8 , Second Floor 14th Main
                       Road, R.P.C layout, Attiguppe, Vijayanagar, Bengaluru, Karnataka
-                      560104
+                      560104 <a target="_blank" href="https://www.google.com/maps?q=12.956615447998047,77.53341674804688&z=17&hl=en">Locate Here</a>
                     </p>
                   </div>
                 </div>
               </li>
-              <li><iframe
+               <li>
+                <div class="info">
+                
+                  <div class="d-flex">
+                    <i class="fa fa-map-marker" aria-hidden="true" style="    margin-top: 5px;margin-right: 5px"></i>
+                    <p class="in-p mb-0"><b>Branch office [Bengaluru South] : </b>No.24 , 5th cross, 2nd Phase, J.P.Nagar,  Bangalore 560078 <a target="_blank" href="https://www.google.com/maps?q=12.912841796875,77.58663940429688&z=17&hl=en">Locate Here</a>
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- <li><iframe
                   src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15552.95090098994!2d77.5334177!3d12.9566344!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3e387cf57aeb%3A0x18aebb2ed188a219!2sPE-Realtors!5e0!3m2!1sen!2sin!4v1722419484592!5m2!1sen!2sin"
                   width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"></iframe></li>
-              <li>
+              <li> -->
 
                 <div class="info">
                   <div class="d-flex">
@@ -232,7 +249,7 @@
                   target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
               <!-- <li><a href="mailto:pe@perealtors.com"><i class="fa fa-envelope" aria-hidden="true"></i></a></li> -->
               <li><a target="_blank" href="https://api.whatsapp.com/send?phone=+916364003399&amp;text=Hi%20"
-                  target="_blank"><img src="<?= IMAGE ?>whatsapp.png" style="max-width: 22px"></a></li>
+                  target="_blank"><img src="<?= IMAGE ?>whatsapp.png" style="max-width: 40px;margin-top: -7px;"></a></li>
             </ul>
           </div>
         </div>

@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row d-flex justify-content-center">
           <!-- <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
@@ -68,14 +68,11 @@
             </div>
           </div> -->
           <!-- /.col -->
-          <div class="col-4">
-          </div>
-          <div class="col-4">
-            <centre><button type="button" onclick="forgot_password_func()" name="login_btn" value="1"
-                class="btn btn-primary btn-block">Reset Pssword</button></centre>
-          </div>
-          <div class="col-4">
-          </div>
+
+
+          <button type="button" onclick="forgot_password_func()" name="login_btn" value="1"
+            class="btn btn-primary d-block">Reset Password</button>
+
           <!-- /.col -->
         </div>
         <?php echo form_close() ?>
@@ -129,7 +126,7 @@
 
         type: "POST",
 
-        url: '<?= MAINSITE_Admin ?>Login/reset_password',
+        url: '<?= MAINSITE_Admin ?>Login/admin_reset_password',
 
         dataType: "json",
 

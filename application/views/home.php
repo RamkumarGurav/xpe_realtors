@@ -73,7 +73,7 @@
                   <div class="row">
                     <div class="search-box">
                       <form name="search_results_form" id="search_results_form" action="<?= MAINSITE ?>search-results"
-                        accept-charset="utf-8" autocomplete="off" enctype="multipart/form-data" method="POST">
+                        accept-charset="utf-8" autocomplete="off" enctype="multipart/form-data" method="GET">
                         <input type="hidden" name="sale_type" value="3">
                         <input type="text" name="search_keyword" id="search_keyword"
                           placeholder="City, Neighborhood, Address, Postal Code, School District">
@@ -90,9 +90,9 @@
                   <div class="row">
                     <div class="search-box">
                       <form name="search_results_form" id="search_results_form" action="<?= MAINSITE ?>search-results"
-                        accept-charset="utf-8" autocomplete="off" enctype="multipart/form-data" method="POST">
+                        accept-charset="utf-8" autocomplete="off" enctype="multipart/form-data" method="GET">
                         <input type="hidden" name="sale_type" value="1">
-                        <input type="text" name="search_keyword" id="search_keyword"
+                        <input type="text" name="search_keyword"
                           placeholder="City, Neighborhood, Address, Postal Code, School District">
                         <button type="submit" class="icon">
                           <i class="fas fa-search"></i>
@@ -123,7 +123,7 @@
 </section>
 <!-- END HEADER IMAGE -->
 
-<?php if (!empty($property_data)): ?>
+<?php if (!empty($property_data_carousel)): ?>
   <section class="recently portfolio bg-white-1 home18">
     <div class="container">
       <div class="sec-title">
@@ -132,7 +132,7 @@
       </div>
       <div class="portfolio col-xl-12">
         <div class="slick-lancers">
-          <?php foreach ($property_data as $item): ?>
+          <?php foreach ($property_data_carousel as $item): ?>
             <div class="agents-grid" data-aos="fade-up" data-aos-delay="150">
               <div class="landscapes">
                 <div class="project-single">
@@ -201,12 +201,12 @@
     <div class="owl-carousel style1">
       <div class="service-item">
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-4 p-0 m-0">
             <center>
               <img src="<?= IMAGE ?>s5.png" class="img-responsive">
             </center>
           </div>
-          <div class="col-lg-8">
+          <div class="col-lg-8 p-0 m-0">
             <div class="client-comment">
               <h2 class="services-head">Customized <span style="color: #d89e29">Sourcing Solution</span>
                 to Buy or Rent properties
@@ -222,10 +222,10 @@
       </div>
       <div class="service-item">
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-4 p-0 m-0">
             <center><img src="<?= IMAGE ?>s1.png" class="img-responsive"></center>
           </div>
-          <div class="col-lg-8">
+          <div class="col-lg-8 p-0 m-0">
             <div class="client-comment">
               <h2 class="services-head">End to End <span style="color: #d89e29">Property
                   Management Services</span>
@@ -241,10 +241,10 @@
       </div>
       <div class="service-item">
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-4 p-0 m-0">
             <center> <img src="<?= IMAGE ?>s3.png" class="img-responsive"></center>
           </div>
-          <div class="col-lg-8">
+          <div class="col-lg-8 p-0 m-0">
             <div class="client-comment">
               <h2 class="services-head">Property<span style="color: #d89e29"> Document
                   Verification/Legal Opinion</span>
@@ -260,10 +260,10 @@
       </div>
       <div class="service-item">
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-4 p-0 m-0">
             <center><img src="<?= IMAGE ?>s4.png" class="img-responsive"></center>
           </div>
-          <div class="col-lg-8">
+          <div class="col-lg-8 p-0 m-0">
             <div class="client-comment">
               <h2 class="services-head"><span style="color: #d89e29">Property Khata / EC / Deed
                   Registration </span> Services
@@ -279,10 +279,10 @@
       </div>
       <div class="service-item">
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-4 p-0 m-0">
             <center> <img src="<?= IMAGE ?>s2.png" class="img-responsive"></center>
           </div>
-          <div class="col-lg-8">
+          <div class="col-lg-8 p-0 m-0">
             <div class="client-comment">
               <h2 class="services-head">Customized <span style="color: #d89e29">Marketing Solutions </span> for Property
                 Rent/Sale

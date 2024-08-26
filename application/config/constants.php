@@ -70,6 +70,14 @@ define('__forgotPassword__', "forgot-password");  // for forgot Password
 define('__changePassword__', "change-password");  // for Change Password
 define('__dashboard__', "dashboard");  // for User Dashboard
 
+//mail-smtp
+define('_smtp_username_', "clientnoreply@webdesigncompanybangalore.com");
+define('_smtp_password_', "Myworld@123#");
+define('_smtp_from_email_', "clientnoreply@webdesigncompanybangalore.com");
+define('_smtp_from_name_', "Pe Realtors");
+define('_smtp_from_address_', "Pe Realtors");
+
+
 
 
 //// file paths

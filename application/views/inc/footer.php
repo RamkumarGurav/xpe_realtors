@@ -46,34 +46,67 @@
             <div class="col-lg-6 col-md-6">
                <div class="widget">
                   <h3>Contact Us</h3>
-                  <div class="contactus">
-                     <ul>
-                        <li>
-                           <div class="info">
-                              <i class="fa fa-map-marker" aria-hidden="true"></i>
-                              <p class="in-p"><b>Registered Office: </b>#329, 21st Main, JP Nagar 2nd Stage, Mysore
-                                 Karnataka. 570008</p>
-                              <p class="in-p"><b>Corporate Office: </b>No.2932/A New Corporation No.8 , Second Floor
-                                 14th Main
-                                 Road, R.P.C layout, Attiguppe, Vijayanagar, Bengaluru, Karnataka
-                                 560104
-                              </p>
-                           </div>
-                        </li>
-                        <li>
-                           <div class="info">
-                              <i class="fa fa-phone" aria-hidden="true"></i>
-                              <p class="in-p">+91 6364003399 / +91 6364084823 / +91 6364098590</p>
-                           </div>
-                        </li>
-                        <li>
-                           <div class="info">
-                              <i class="fa fa-envelope" aria-hidden="true"></i>
-                              <p class="in-p ti">pe@perealtors.com</p>
-                           </div>
-                        </li>
-                     </ul>
+                  <ul class="contact">
+              <li>
+                <div class="info">
+                  <div class="d-flex text-white">
+                    <i class="fa fa-map-marker" aria-hidden="true" style="    margin-top: 5px;margin-right: 5px"></i>
+                    <p class="in-p mb-0"><span style="color: #da9f3a !important;">Registered Office : </span> #329, 21st Main, JP Nagar 2nd Stage, Mysore Karnataka.
+                      570008 </p>
+
                   </div>
+                    
+                </div>
+              </li>
+                <li>
+                <div class="info">
+                
+                  <div class="d-flex text-white">
+                    <i class="fa fa-map-marker" aria-hidden="true" style="    margin-top: 5px;margin-right: 5px"></i>
+                    <p class="in-p mb-0"><span style="color: #da9f3a !important;">Corporate Office : </span> No.2932/A New Corporation No.8 , Second Floor 14th Main
+                      Road, R.P.C layout, Attiguppe, Vijayanagar, Bengaluru, Karnataka
+                      560104 
+                    </p>
+                  </div>
+                </div>
+              </li>
+               <li>
+                <div class="info">
+                
+                  <div class="d-flex text-white">
+                    <i class="fa fa-map-marker" aria-hidden="true" style="    margin-top: 5px;margin-right: 5px"></i>
+                    <p class="in-p mb-0"><span style="color: #da9f3a !important;">Branch office [Bengaluru South] : </span> No.24 , 5th cross, 2nd Phase, J.P.Nagar,  Bangalore 560078 
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <!-- <li><iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15552.95090098994!2d77.5334177!3d12.9566344!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3e387cf57aeb%3A0x18aebb2ed188a219!2sPE-Realtors!5e0!3m2!1sen!2sin!4v1722419484592!5m2!1sen!2sin"
+                  width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe></li>
+              <li> -->
+
+                <div class="info">
+                  <div class="d-flex text-white">
+                    <i class="fa fa-phone" aria-hidden="true" style="    margin-top: 5px;margin-right: 5px"></i>
+
+                    <p class="in-p">
++91 6364003399 / +91 6364084823 / +91 6364098590</p>
+                  </div>
+                </div>
+              
+              <li>
+                <div class="info">
+
+                  <div class="d-flex text-white">
+                    <i class="fa fa-envelope" aria-hidden="true" style="    margin-top: 5px;margin-right: 5px"></i>
+
+                    <p class="in-p ti"> pe@perealtors.com</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+                  
                </div>
             </div>
             <!--  <div class="col-lg-3 col-md-6">

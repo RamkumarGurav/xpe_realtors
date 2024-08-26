@@ -407,7 +407,6 @@ class Location_module extends Main
 		$is_display = trim($_POST['is_display']);
 		$status = trim($_POST['status']);
 
-		// Check if a location with the same name already exists in the same country and state but with a different id
 		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "name =\"$name\" and pincode = '$pincode' and id != $id and city_id = $city_id and state_id = $state_id"));
 
 		// If the location exists, set an error message and redirect to the edit page

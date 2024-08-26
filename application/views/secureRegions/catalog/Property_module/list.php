@@ -29,7 +29,7 @@
     <section class="content">
         <div class="row">
             <div class="col-12">
-                <div id="accordion">
+                <div id="accordion" style="display:none;">
                     <!-- we are adding the .class so bootstrap.js collapse plugin detects it -->
                     <div class="card card-primary">
                         <div class="card-header">
@@ -258,7 +258,7 @@
                                         <th>Type</th>
                                         <th>Sub Type</th>
                                         <th>Location</th>
-                                        <th>Age</th>
+                                        <!-- <th>Age</th> -->
                                         <th>Negotiable</th>
                                         <th>Display</th>
                                         <th>Status</th>
@@ -285,9 +285,9 @@
                                                 </td>
                                                 <td><?php echo $item->property_type_name ?></td>
                                                 <td><?php echo $item->property_sub_type_name ?></td>
-                                                <td><?php echo $item->location_name . ", " . $item->pincode . ", " . $item->city_name . ", " . $item->state_name ?>
+                                                <td><?php echo $item->location_name . " ," . $item->city_name . " " . $item->state_name . "," . $item->pincode ?>
                                                 </td>
-                                                <td><?php echo $item->property_age_name ?></td>
+                                                <!-- <td><?php echo $item->property_age_name ?></td> -->
 
                                                 <td>
                                                     <?php if ($item->is_negotiable == 1) { ?> <i

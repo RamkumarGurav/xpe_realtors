@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-include ('Main.php');
+include('Main.php');
 class Ajax extends main
 {
 
@@ -131,7 +131,7 @@ class Ajax extends main
 				"order_by" => "name ASC"
 			)
 		);
-		$result = '<option value="">Property Sub Type</option>';
+		$result = '<option value="">Select Property Sub Type</option>';
 		if (!empty($property_sub_type_data)) {
 			foreach ($property_sub_type_data as $r) {
 				$if_block = $selected = '';

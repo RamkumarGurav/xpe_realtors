@@ -313,7 +313,6 @@ class Property_module extends Main
 		$search['limit'] = $per_page;
 		$search['offset'] = $offset;
 
-		// $this->data['country_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "country_id > 0", "order_by" => "country_name ASC"));
 		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['property_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_type', 'where' => "id > 0", "order_by" => "name ASC"));
 
@@ -331,7 +330,6 @@ class Property_module extends Main
 	//using
 	function list_export()
 	{
-		$country_id = 1;
 		$this->data['page_type'] = "list";
 		$user_access = $this->data['user_access'] = $this->data['User_auth_obj']->check_user_access(array("module_id" => $this->data['page_module_id']));
 
@@ -341,7 +339,7 @@ class Property_module extends Main
 		}
 
 		if ($this->data['user_access']->export_data != 1) {
-			$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Export " . $user_access->module_name);
+			$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Export " . $user_access->name);
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
 
@@ -480,7 +478,6 @@ class Property_module extends Main
 		$this->data['property_sub_type_id'] = $property_sub_type_id;
 		$this->data['property_age_id'] = $property_age_id;
 
-		$this->data['country_id'] = $country_id;
 		$this->data['state_id'] = $state_id;
 		$this->data['city_id'] = $city_id;
 		$this->data['location_id'] = $location_id;
@@ -515,7 +512,6 @@ class Property_module extends Main
 		$search['property_sub_type_id'] = $property_sub_type_id;
 		$search['property_age_id'] = $property_age_id;
 
-		$search['country_id'] = $country_id;
 		$search['state_id'] = $state_id;
 		$search['city_id'] = $city_id;
 		$search['location_id'] = $location_id;
@@ -599,13 +595,13 @@ class Property_module extends Main
 		}
 		if (empty($id)) {
 			if ($user_access->add_module != 1) {
-				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->module_name);
+				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
 		if (!empty($id)) {
 			if ($user_access->update_module != 1) {
-				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->module_name);
+				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
@@ -615,13 +611,12 @@ class Property_module extends Main
 		$this->data['page_parent_module_id'] = $this->data['user_access']->parent_module_id;
 
 
-		$this->data['country_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'country', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['location_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['property_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_type', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['property_sub_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_sub_type', 'where' => "id > 0", "order_by" => "name ASC"));
-		$this->data['property_age_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_age', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['property_age_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_age', 'where' => "id > 0", "order_by" => "id ASC"));
 		$this->data['facing_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'facing_type', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['bhk_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'bhk_type', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['gated_community_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'gated_community_type', 'where' => "id > 0", "order_by" => "name ASC"));
@@ -672,7 +667,8 @@ class Property_module extends Main
 
 		$this->data['id'] = $id;
 		$this->data['selected_property_type_id'] = $selected_property_type_id;
-		$this->data['property_age_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_age', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['property_sub_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_sub_type', 'where' => "id > 0", "order_by" => "name ASC"));
+		$this->data['property_age_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_age', 'where' => "id > 0", "order_by" => "id ASC"));
 		$this->data['facing_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'facing_type', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['bhk_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'bhk_type', 'where' => "id > 0", "order_by" => "name ASC"));
 		$this->data['gated_community_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'gated_community_type', 'where' => "id > 0", "order_by" => "name ASC"));
@@ -713,7 +709,7 @@ class Property_module extends Main
 
 		// Validate essential form fields; if empty, set an error message and redirect
 		if (
-			empty($_POST['name']) && empty($_POST['property_type_id']) && empty($_POST['property_sub_type_id'])
+			empty($_POST['name']) && empty($_POST['property_type_id'])
 			&& empty($_POST['state_id']) && empty($_POST['city_id']) && empty($_POST['location_id'])
 			&& empty($_POST['sale_type']) && empty($_POST['sale_duration_type']) && empty($_POST['sale_amount'])
 			&& empty($_POST['description']) && empty($_POST['other_details']) && empty($_POST['cover_image_title'])
@@ -739,7 +735,7 @@ class Property_module extends Main
 		// Check if the user has permission to add a property (if id is empty)
 		if (empty($id)) {
 			if ($user_access->add_module != 1) {
-				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->module_name);
+				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Add " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
@@ -747,7 +743,7 @@ class Property_module extends Main
 		// Check if the user has permission to update a property (if id is not empty)
 		if (!empty($id)) {
 			if ($user_access->update_module != 1) {
-				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->module_name);
+				$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->name);
 				REDIRECT(MAINSITE_Admin . "wam/access-denied");
 			}
 		}
@@ -803,7 +799,19 @@ class Property_module extends Main
 
 		}
 
-		// Check if a property with the same name already exists in the same country and state but with a different id
+
+
+		$is_slug_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'property', 'where' => "slug_url = \"$slug_url\" and id != $id "));
+
+		// If the property exists, set an error message and redirect to the edit page
+		if (!empty($is_slug_exist)) {
+			$alert_message = '<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" 
+			aria-hidden="true">×</button><i class="icon fas fa-ban"></i> This Slug Url already exists in the databse.</div>';
+			$this->session->set_flashdata('alert_message', $alert_message);
+			REDIRECT(MAINSITE_Admin . $user_access->class_name . "/edit/" . $id);
+			exit;
+		}
+
 		$is_exist = $this->Common_model->get_data(array('select' => '*', 'from' => 'property', 'where' => "name = \"$name\" and city_id = $city_id and state_id = $state_id and location_id = $location_id and id != $id "));
 
 		// If the property exists, set an error message and redirect to the edit page
@@ -940,7 +948,7 @@ class Property_module extends Main
 			REDIRECT(MAINSITE_Admin . $user_access->class_name . '/' . $user_access->function_name);
 		} else {
 			// If user doesn't have permission, set access-denied message and redirect.
-			$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->module_name);
+			$this->session->set_flashdata('no_access_flash_message', "You Are Not Allowed To Update " . $user_access->name);
 			REDIRECT(MAINSITE_Admin . "wam/access-denied");
 		}
 	}
@@ -1064,8 +1072,8 @@ class Property_module extends Main
 
 		$search = array();
 		$id = $property_id = 0;
-		if (!empty($_POST['id'])) {
-			$id = $_POST['id'];
+		if (!empty($_POST['property_gallery_image_id'])) {
+			$id = $_POST['property_gallery_image_id'];
 		}
 		if (!empty($_POST['property_id'])) {
 			$property_id = $_POST['property_id'];

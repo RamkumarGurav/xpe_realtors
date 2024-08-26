@@ -57,6 +57,38 @@ jQuery(document).on('ready', function ($) {
             }
         }
     });
+       $('.style11').owlCarousel({
+        loop: true,
+        margin: 10,
+        // nav:true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        responsive: {
+            0: {
+                items: 1
+            },
+            400: {
+                items: 1,
+                margin: 20
+            },
+            500: {
+                items: 1,
+                margin: 20
+            },
+            768: {
+                items: 2,
+                margin: 20
+            },
+            991: {
+                items: 3,
+                margin: 20
+            },
+            1025: {
+                items: 3,
+                margin: 20
+            }
+        }
+    });
  $('.style-3').owlCarousel({
         loop: true,
         margin: 10,

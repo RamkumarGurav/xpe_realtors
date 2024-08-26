@@ -22,12 +22,16 @@ class User extends Main
 
   }
 
+
+
+
+
   public function index()
   {
 
-    $this->data['meta_title'] = _project_name_;
-    $this->data['meta_description'] = _project_name_;
-    $this->data['meta_keywords'] = _project_name_;
+    $this->data['meta_title'] = _project_name_ . "| Home";
+    $this->data['meta_description'] = _project_name_ . "| Home";
+    $this->data['meta_keywords'] = _project_name_ . "| Home";
     $this->data['meta_others'] = "";
 
 
@@ -41,6 +45,9 @@ class User extends Main
     $this->data['property_data'] = $this->User_model->get_property_data(
       $search
     );
+
+
+    $this->data['property_data_carousel'] = array_slice($this->data['property_data'], 0, 10);
 
 
 
@@ -71,12 +78,10 @@ class User extends Main
   {
 
 
-
-    // if (isset($_POST['search_results_form_type'])) {
-    //   echo "<pre> <br>";
-    //   print_r($_POST);
-    //   exit;
-    // }
+    $this->data['meta_title'] = "Search Results" . _project_name_;
+    $this->data['meta_description'] = "Search Results" . _project_name_;
+    $this->data['meta_keywords'] = "Search Results" . _project_name_;
+    $this->data['meta_others'] = "";
 
 
 
@@ -92,11 +97,11 @@ class User extends Main
     $end_date = '';
 
 
-    $property_type_id = "";
+    $property_type_id = 0;
 
 
-    $property_sub_type_id = "";
-    $property_age_id = "";
+    $property_sub_type_id = 0;
+    $property_age_id = 0;
 
 
     $state_id = "";
@@ -108,14 +113,14 @@ class User extends Main
     $start_sale_amount = "";
     $end_sale_amount = "";
 
-    $bhk_type_id = "";
-    $plot_facing_type_id = "";
-    $door_facing_type_id = "";
+    $bhk_type_id = 0;
+    $plot_facing_type_id = 0;
+    $door_facing_type_id = 0;
     $plot_dimension_sqft = "";
     $built_up_area = "";
     $in_acres = "";
     $in_guntas = "";
-    $gated_community_type_id = "";
+    $gated_community_type_id = 0;
 
 
 
@@ -130,88 +135,93 @@ class User extends Main
 
 
 
+
     if (!empty($_REQUEST['search_keyword']))
-      $search_keyword = $_POST['search_keyword'];
+      $search_keyword = $_REQUEST['search_keyword'];
     else if (!empty($search_keyword))
       $search_keyword = $search_keyword;
 
 
+
+
     if (!empty($_REQUEST['field_name']))
-      $field_name = $_POST['field_name'];
+      $field_name = $_REQUEST['field_name'];
     else if (!empty($field_name))
       $field_name = $field_name;
     if (!empty($_REQUEST['field_value']))
-      $field_value = $_POST['field_value'];
+      $field_value = $_REQUEST['field_value'];
     else if (!empty($field_value))
       $field_value = $field_value;
 
 
 
-    if (!empty($_POST['start_date']))
-      $start_date = $_POST['start_date'];
-    if (!empty($_POST['end_date']))
-      $end_date = $_POST['end_date'];
+    if (!empty($_REQUEST['start_date']))
+      $start_date = $_REQUEST['start_date'];
+    if (!empty($_REQUEST['end_date']))
+      $end_date = $_REQUEST['end_date'];
 
 
     if (!empty($_GET['p_type'])) {
       $property_type_id = $_GET['p_type'];
     }
-    if (!empty($_POST['property_type_id']))
-      $property_type_id = $_POST['property_type_id'];
-    if (!empty($_POST['property_sub_type_id']))
-      $property_sub_type_id = $_POST['property_sub_type_id'];
-    if (!empty($_POST['property_age_id']))
-      $property_age_id = $_POST['property_age_id'];
+
+    if (!empty($_REQUEST['property_type_id']))
+      $property_type_id = $_REQUEST['property_type_id'];
+
+    if (!empty($_REQUEST['property_sub_type_id']))
+      $property_sub_type_id = $_REQUEST['property_sub_type_id'];
+
+    if (!empty($_REQUEST['property_age_id']))
+      $property_age_id = $_REQUEST['property_age_id'];
 
 
 
-    if (!empty($_POST['state_id']))
-      $state_id = $_POST['state_id'];
-    if (!empty($_POST['city_id']))
-      $city_id = $_POST['city_id'];
-    if (!empty($_POST['location_id']))
-      $location_id = $_POST['location_id'];
+    if (!empty($_REQUEST['state_id']))
+      $state_id = $_REQUEST['state_id'];
+    if (!empty($_REQUEST['city_id']))
+      $city_id = $_REQUEST['city_id'];
+    if (!empty($_REQUEST['location_id']))
+      $location_id = $_REQUEST['location_id'];
 
 
 
 
 
-    if (!empty($_POST['sale_type']))
-      $sale_type = $_POST['sale_type'];
-    if (!empty($_POST['sale_duration_type']))
-      $sale_duration_type = $_POST['sale_duration_type'];
-    if (!empty($_POST['start_sale_amount']))
-      $start_sale_amount = $_POST['start_sale_amount'];
-    if (!empty($_POST['end_sale_amount']))
-      $end_sale_amount = $_POST['end_sale_amount'];
+    if (!empty($_REQUEST['sale_type']))
+      $sale_type = $_REQUEST['sale_type'];
+    if (!empty($_REQUEST['sale_duration_type']))
+      $sale_duration_type = $_REQUEST['sale_duration_type'];
+    if (!empty($_REQUEST['start_sale_amount']))
+      $start_sale_amount = $_REQUEST['start_sale_amount'];
+    if (!empty($_REQUEST['end_sale_amount']))
+      $end_sale_amount = $_REQUEST['end_sale_amount'];
 
 
 
-    if (!empty($_POST['bhk_type_id']))
-      $bhk_type_id = $_POST['bhk_type_id'];
-    if (!empty($_POST['plot_facing_type_id']))
-      $plot_facing_type_id = $_POST['plot_facing_type_id'];
-    if (!empty($_POST['door_facing_type_id']))
-      $door_facing_type_id = $_POST['door_facing_type_id'];
-    if (!empty($_POST['plot_dimension_sqft']))
-      $plot_dimension_sqft = $_POST['plot_dimension_sqft'];
-    if (!empty($_POST['built_up_area']))
-      $built_up_area = $_POST['built_up_area'];
-    if (!empty($_POST['in_acres']))
-      $in_acres = $_POST['in_acres'];
-    if (!empty($_POST['in_guntas']))
-      $in_guntas = $_POST['in_guntas'];
-    if (!empty($_POST['gated_community_type_id']))
-      $gated_community_type_id = $_POST['gated_community_type_id'];
+    if (!empty($_REQUEST['bhk_type_id']))
+      $bhk_type_id = $_REQUEST['bhk_type_id'];
+    if (!empty($_REQUEST['plot_facing_type_id']))
+      $plot_facing_type_id = $_REQUEST['plot_facing_type_id'];
+    if (!empty($_REQUEST['door_facing_type_id']))
+      $door_facing_type_id = $_REQUEST['door_facing_type_id'];
+    if (!empty($_REQUEST['plot_dimension_sqft']))
+      $plot_dimension_sqft = $_REQUEST['plot_dimension_sqft'];
+    if (!empty($_REQUEST['built_up_area']))
+      $built_up_area = $_REQUEST['built_up_area'];
+    if (!empty($_REQUEST['in_acres']))
+      $in_acres = $_REQUEST['in_acres'];
+    if (!empty($_REQUEST['in_guntas']))
+      $in_guntas = $_REQUEST['in_guntas'];
+    if (!empty($_REQUEST['gated_community_type_id']))
+      $gated_community_type_id = $_REQUEST['gated_community_type_id'];
 
 
 
     $offset = 0;
-    $limit = 1;
+    $limit = 10;
 
-    if (!empty($_POST['is_negotiable']))
-      $is_negotiable = $_POST['is_negotiable'];
-
+    if (!empty($_REQUEST['is_negotiable']))
+      $is_negotiable = $_REQUEST['is_negotiable'];
 
 
 
@@ -258,6 +268,14 @@ class User extends Main
 
 
     $this->data['is_negotiable'] = $is_negotiable;
+    $this->data['is_display'] = $is_display;
+    $this->data['record_status'] = $record_status;
+
+
+    $this->session->set_userdata("input_data", $this->data);
+
+
+
 
     $search['search_keyword'] = $search_keyword;
     $search['field_name'] = $field_name;
@@ -310,17 +328,10 @@ class User extends Main
 
 
 
-
-
     $this->data['state_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'state', 'where' => "id > 0 and status = 1 and is_display=1", "order_by" => "name ASC"));
     $this->data['city_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'city', 'where' => "id > 0 and status = 1 and is_display=1", "order_by" => "name ASC"));
     $this->data['location_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'location', 'where' => "id > 0 and status = 1 and is_display=1", "order_by" => "name ASC"));
     $this->data['property_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
-    $this->data['property_sub_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_sub_type', 'where' => "id > 0  and status = 1", "order_by" => "name ASC"));
-    $this->data['property_age_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'property_age', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
-    $this->data['facing_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'facing_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
-    $this->data['bhk_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'bhk_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
-    $this->data['gated_community_type_data'] = $this->Common_model->get_data(array('select' => '*', 'from' => 'gated_community_type', 'where' => "id > 0 and status = 1", "order_by" => "name ASC"));
 
 
 
@@ -382,90 +393,90 @@ class User extends Main
 
 
     if (!empty($_REQUEST['search_keyword']))
-      $search_keyword = $_POST['search_keyword'];
+      $search_keyword = $_REQUEST['search_keyword'];
     else if (!empty($search_keyword))
       $search_keyword = $search_keyword;
 
 
     if (!empty($_REQUEST['field_name']))
-      $field_name = $_POST['field_name'];
+      $field_name = $_REQUEST['field_name'];
     else if (!empty($field_name))
       $field_name = $field_name;
     if (!empty($_REQUEST['field_value']))
-      $field_value = $_POST['field_value'];
+      $field_value = $_REQUEST['field_value'];
     else if (!empty($field_value))
       $field_value = $field_value;
 
 
 
-    if (!empty($_POST['start_date']))
-      $start_date = $_POST['start_date'];
-    if (!empty($_POST['end_date']))
-      $end_date = $_POST['end_date'];
+    if (!empty($_REQUEST['start_date']))
+      $start_date = $_REQUEST['start_date'];
+    if (!empty($_REQUEST['end_date']))
+      $end_date = $_REQUEST['end_date'];
 
 
-    if (!empty($_GET['p_type'])) {
-      $property_type_id = $_GET['p_type'];
+    if (!empty($_REQUEST['p_type'])) {
+      $property_type_id = $_REQUEST['p_type'];
     }
-    if (!empty($_POST['property_type_id']))
-      $property_type_id = $_POST['property_type_id'];
-    if (!empty($_POST['property_sub_type_id']))
-      $property_sub_type_id = $_POST['property_sub_type_id'];
-    if (!empty($_POST['property_age_id']))
-      $property_age_id = $_POST['property_age_id'];
+    if (!empty($_REQUEST['property_type_id']))
+      $property_type_id = $_REQUEST['property_type_id'];
+    if (!empty($_REQUEST['property_sub_type_id']))
+      $property_sub_type_id = $_REQUEST['property_sub_type_id'];
+    if (!empty($_REQUEST['property_age_id']))
+      $property_age_id = $_REQUEST['property_age_id'];
 
 
 
-    if (!empty($_POST['state_id']))
-      $state_id = $_POST['state_id'];
-    if (!empty($_POST['city_id']))
-      $city_id = $_POST['city_id'];
-    if (!empty($_POST['location_id']))
-      $location_id = $_POST['location_id'];
-
-
-
-
-
-    if (!empty($_POST['sale_type']))
-      $sale_type = $_POST['sale_type'];
-    if (!empty($_POST['sale_duration_type']))
-      $sale_duration_type = $_POST['sale_duration_type'];
-    if (!empty($_POST['start_sale_amount']))
-      $start_sale_amount = $_POST['start_sale_amount'];
-    if (!empty($_POST['end_sale_amount']))
-      $end_sale_amount = $_POST['end_sale_amount'];
-
-
-
-    if (!empty($_POST['bhk_type_id']))
-      $bhk_type_id = $_POST['bhk_type_id'];
-    if (!empty($_POST['plot_facing_type_id']))
-      $plot_facing_type_id = $_POST['plot_facing_type_id'];
-    if (!empty($_POST['door_facing_type_id']))
-      $door_facing_type_id = $_POST['door_facing_type_id'];
-    if (!empty($_POST['plot_dimension_sqft']))
-      $plot_dimension_sqft = $_POST['plot_dimension_sqft'];
-    if (!empty($_POST['built_up_area']))
-      $built_up_area = $_POST['built_up_area'];
-    if (!empty($_POST['in_acres']))
-      $in_acres = $_POST['in_acres'];
-    if (!empty($_POST['in_guntas']))
-      $in_guntas = $_POST['in_guntas'];
-    if (!empty($_POST['gated_community_type_id']))
-      $gated_community_type_id = $_POST['gated_community_type_id'];
+    if (!empty($_REQUEST['state_id']))
+      $state_id = $_REQUEST['state_id'];
+    if (!empty($_REQUEST['city_id']))
+      $city_id = $_REQUEST['city_id'];
+    if (!empty($_REQUEST['location_id']))
+      $location_id = $_REQUEST['location_id'];
 
 
 
 
 
-    $limit = 1;
-    if (!empty($_POST['offset']))
-      $offset = $_POST['offset'];
+    if (!empty($_REQUEST['sale_type']))
+      $sale_type = $_REQUEST['sale_type'];
+    if (!empty($_REQUEST['sale_duration_type']))
+      $sale_duration_type = $_REQUEST['sale_duration_type'];
+    if (!empty($_REQUEST['start_sale_amount']))
+      $start_sale_amount = $_REQUEST['start_sale_amount'];
+    if (!empty($_REQUEST['end_sale_amount']))
+      $end_sale_amount = $_REQUEST['end_sale_amount'];
 
 
-    if (!empty($_POST['is_negotiable']))
-      $is_negotiable = $_POST['is_negotiable'];
+
+    if (!empty($_REQUEST['bhk_type_id']))
+      $bhk_type_id = $_REQUEST['bhk_type_id'];
+    if (!empty($_REQUEST['plot_facing_type_id']))
+      $plot_facing_type_id = $_REQUEST['plot_facing_type_id'];
+    if (!empty($_REQUEST['door_facing_type_id']))
+      $door_facing_type_id = $_REQUEST['door_facing_type_id'];
+    if (!empty($_REQUEST['plot_dimension_sqft']))
+      $plot_dimension_sqft = $_REQUEST['plot_dimension_sqft'];
+    if (!empty($_REQUEST['built_up_area']))
+      $built_up_area = $_REQUEST['built_up_area'];
+    if (!empty($_REQUEST['in_acres']))
+      $in_acres = $_REQUEST['in_acres'];
+    if (!empty($_REQUEST['in_guntas']))
+      $in_guntas = $_REQUEST['in_guntas'];
+    if (!empty($_REQUEST['gated_community_type_id']))
+      $gated_community_type_id = $_REQUEST['gated_community_type_id'];
+
+
+
+
+
+    $limit = 10;
+    if (!empty($_REQUEST['offset']))
+      $offset = $_REQUEST['offset'];
+
+
+    if (!empty($_REQUEST['is_negotiable']))
+      $is_negotiable = $_REQUEST['is_negotiable'];
 
 
 
@@ -575,16 +586,41 @@ class User extends Main
   {
 
 
+    $this->data = $this->session->userdata('input_data');
+
 
 
     $selected_property_type_id = 0;
-    if (!empty($_POST['selected_property_type_id'])) {
-      $selected_property_type_id = $_POST['selected_property_type_id'];
+    if (!empty($_REQUEST['selected_property_type_id'])) {
+      $selected_property_type_id = $_REQUEST['selected_property_type_id'];
     }
 
-
+    // if (!empty($_REQUEST['property_sub_type_id'])) {
+    //   $property_sub_type_id = $_REQUEST['property_sub_type_id'];
+    // }
+    // if (!empty($_REQUEST['bhk_type_id'])) {
+    //   $bhk_type_id = $_REQUEST['bhk_type_id'];
+    // }
+    // if (!empty($_REQUEST['plot_facing_type_id'])) {
+    //   $plot_facing_type_id = $_REQUEST['plot_facing_type_id'];
+    // }
+    // if (!empty($_REQUEST['door_facing_type_id'])) {
+    //   $door_facing_type_id = $_REQUEST['door_facing_type_id'];
+    // }
+    // if (!empty($_REQUEST['gated_community_type_id'])) {
+    //   $gated_community_type_id = $_REQUEST['gated_community_type_id'];
+    // }
 
     $this->data['selected_property_type_id'] = $selected_property_type_id;
+    // $this->data['property_sub_type_id'] = $property_sub_type_id;
+    // $this->data['bhk_type_id'] = $bhk_type_id;
+    // $this->data['plot_facing_type_id'] = $plot_facing_type_id;
+    // $this->data['door_facing_type_id'] = $door_facing_type_id;
+    // $this->data['gated_community_type_id'] = $gated_community_type_id;
+
+
+
+
     $this->data['property_age_data'] = $this->Common_model->get_data(array(
       'select' => '*',
       'from' => 'property_age',
@@ -609,9 +645,8 @@ class User extends Main
 
     $html_data = $this->load->view('template/add_input_fields', $this->data, true);
 
-
-
     echo json_encode(array("html_data" => $html_data));
+
     die;
   }
 
@@ -636,6 +671,11 @@ class User extends Main
 
     if (!empty(count($this->data['property_data']))) {
       $this->data['property_data'] = $this->data['property_data'][0];
+
+      $this->data['meta_title'] = $this->data['property_data']->name . " | Pe Realtors";
+      $this->data['meta_description'] = $this->data['property_data']->meta_description . "- Pe Realtors";
+      $this->data['meta_keywords'] = $this->data['property_data']->meta_keyword . " - Pe Realtors";
+      $this->data['meta_others'] = "";
     }
 
 
@@ -824,12 +864,9 @@ class User extends Main
       if ($_POST['enq_type'] == 'career') {
         $subject = "New Career Contact Inquiry - " . $from_name;
       }
-      //$address = $from_email = "clientnoreply@webdesigncompanybangalore.com";
-      $address = $from_email = "clientnoreply@webdesigncompanybangalore.com";
-      $to = "abhishek.khandelwal82@gmail.com";
+      $address = $from_email = "noreply@perealtors.com";
+      $to = "pe@perealtors.com";
       // $to = "ramkumarsgurav@gmail.com";
-
-
 
       $mailStatus = $this->Common_model->send_mail(array(
         "template" => $mailMessage,
@@ -1002,51 +1039,6 @@ class User extends Main
 
 
 
-
-  // public function testp()
-  // {
-  //   $this->data['meta_title'] = _project_name_ . " - TESTp";
-  //   $this->data['meta_description'] = _project_name_ . " - TESTp";
-  //   $this->data['meta_keywords'] = _project_name_ . " - TESTp";
-  //   $this->data['meta_others'] = "";
-
-
-
-  //   $this->load->view('testp', $this->data);
-  // }
-  // public function test1()
-  // {
-  //   $this->data['meta_title'] = _project_name_ . " - TEST";
-  //   $this->data['meta_description'] = _project_name_ . " - TEST";
-  //   $this->data['meta_keywords'] = _project_name_ . " - TEST";
-  //   $this->data['meta_others'] = "";
-
-
-
-  //   $this->load->view('test1', $this->data);
-  // }
-  // public function test2()
-  // {
-  //   $this->data['meta_title'] = _project_name_ . " - TEST";
-  //   $this->data['meta_description'] = _project_name_ . " - TEST";
-  //   $this->data['meta_keywords'] = _project_name_ . " - TEST";
-  //   $this->data['meta_others'] = "";
-
-
-
-  //   $this->load->view('test2', $this->data);
-  // }
-  // public function test3()
-  // {
-  //   $this->data['meta_title'] = _project_name_ . " - TEST";
-  //   $this->data['meta_description'] = _project_name_ . " - TEST";
-  //   $this->data['meta_keywords'] = _project_name_ . " - TEST";
-  //   $this->data['meta_others'] = "";
-
-
-
-  //   $this->load->view('test3', $this->data);
-  // }
 
 
 

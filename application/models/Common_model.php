@@ -289,30 +289,23 @@ class Common_model extends CI_Model
 
 	function send_mail($params = array())
 	{
-
-
 		$timezone = new DateTimeZone("Asia/Kolkata");
 		$date = new DateTime();
 		$date->setTimezone($timezone);
-
 		if (empty($params))
 			return false;
-
 		$template = $params['template'];
 		$subject = $params['subject'];
 		$to = $params['to'];
 		$name = $params['name'];
-		$to_name = $from_name = "Steel Age Building System";
-
+		// $to_name = $from_name = "Steel Age Building System";
 		$entereddatamaillog['subject'] = $subject;
 		$entereddatamaillog['template'] = $template;
 		$entereddatamaillog['to'] = $to;
 		$entereddatamaillog['added_on'] = date('Y-m-d H:i:s');
-
 		// $from_email = __fromemail__;
 		$address = $from_email = "clientnoreply@webdesigncompanybangalore.com";
 		$from_name = _project_complete_name_;
-
 		$mail = new PHPMailer();
 		$mail->IsSMTP(true); // telling the class to use SMTP
 		// sets the prefix to the servier
@@ -326,10 +319,11 @@ class Common_model extends CI_Model
 		$mail->Password = "Myworld@123#";
 		$mail->SetFrom($from_email, $from_name);
 		$address = $to;
-		//$address =  "vinodh@marswebsolutions.com";
-		//$address =  "admissions@pentagon-services.com";
 		$mail->AddAddress($address, $from_name);
-		$mail->AddReplyTo($to, $from_name);
+		if(!empty($name))
+			$mail->AddReplyTo($to, $name);
+		else 
+			$mail->AddReplyTo($to, $from_name);
 		$mail->Subject = $subject;
 		$mail->MsgHTML($template);
 		//$mail->AltBody = "This is the body in plain text for non-HTML mail clients";
@@ -362,7 +356,10 @@ class Common_model extends CI_Model
 			$entereddatamaillog['error_info'] = $error_info;
 		} else {
 
-			$insertStatus = $this->add_operation(array('table' => 'enquiry', 'data' => $params['enquiry_input_data']));
+			if (!empty($params['enquiry_input_data'])) {
+				$insertStatus = $this->add_operation(array('table' => 'enquiry', 'data' => $params['enquiry_input_data']));
+
+			}
 
 			$mailMessageStatus = "sent";
 			$message = "mailsent";
@@ -429,19 +426,19 @@ class Common_model extends CI_Model
 		$post_data['v'] = "1.1";
 		$post_data['check_duplicate_post'] = "true";
 		/*foreach($post_data as $key=>$val) {
-																																																																									$request.= $key."=".urlencode($val);
-																																																																									$request.= "&";
-																																																																									}	*/
+																																																																																	$request.= $key."=".urlencode($val);
+																																																																																	$request.= "&";
+																																																																																	}	*/
 		$request = substr($request, 0, strlen($request) - 1);
 
 		/*$ch = curl_init();
-																																																																									curl_setopt($ch, CURLOPT_URL, $GATEWAYAPI);
-																																																																									curl_setopt($ch, CURLOPT_POST, 1);
-																																																																									curl_setopt($ch, CURLOPT_HEADER, 0);
-																																																																									curl_setopt($ch, CURLOPT_VERBOSE, 0);
-																																																																									curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-																																																																									curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-																																																																									if(curl_exec($ch) === false){*/
+																																																																																	curl_setopt($ch, CURLOPT_URL, $GATEWAYAPI);
+																																																																																	curl_setopt($ch, CURLOPT_POST, 1);
+																																																																																	curl_setopt($ch, CURLOPT_HEADER, 0);
+																																																																																	curl_setopt($ch, CURLOPT_VERBOSE, 0);
+																																																																																	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+																																																																																	curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+																																																																																	if(curl_exec($ch) === false){*/
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $GATEWAYAPI);
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -560,8 +557,8 @@ class Common_model extends CI_Model
 	}
 
 	/****************************************************************
-																																																																			
-																																					****************************************************************/
+																																																																							
+																																									****************************************************************/
 
 	/****************************************************************
 	 ****************************************************************

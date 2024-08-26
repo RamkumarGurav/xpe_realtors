@@ -22,7 +22,7 @@ function truncate_text($text, $maxLength = 100)
 	return $text;
 }
 
-function split_sentance_for_heading($sentence)
+function split_sentance_for_heading1($sentence)
 {
 	$words = explode(' ', $sentence);
 	$totalWords = count($words);
@@ -35,6 +35,24 @@ function split_sentance_for_heading($sentence)
 	return [$part1, $part2];
 }
 
+
+
+function split_sentance_for_heading($sentence)
+{
+	$words = explode(' ', $sentence);
+	$totalWords = count($words);
+
+	if ($totalWords > 3) {
+		$part1 = implode(' ', array_slice($words, 0, 3));
+		$part2 = implode(' ', array_slice($words, 3));
+
+	} else {
+		$part1 = $sentence;
+		$part2 = '';
+	}
+
+	return [$part1, $part2];
+}
 
 function is_valid_slug_url($slug_url)
 {
